@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'Calendario.dart';
-import 'Exames.dart';
-import 'Academia.dart';
-import 'FichaMedica.dart';
-import 'NovoExame.dart';
+import 'calendario.dart';
+import 'exames.dart';
+import 'academia.dart';
+import 'ficha_medica.dart';
+import 'novo_exame.dart';
 
 void main() {
   runApp(MyApp());
