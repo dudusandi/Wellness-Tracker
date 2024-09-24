@@ -9,7 +9,7 @@ class _NovoExameState extends State<NovoExame> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Novo Exame Content', style: TextStyle(color: Colors.black, fontSize: 24)),
+      child: Text('Novo Exame', style: TextStyle(color: Colors.black, fontSize: 24)),
     );
   }
 }

@@ -9,7 +9,7 @@ class _AcademiaState extends State<Academia> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Academia Content', style: TextStyle(color: Colors.black, fontSize: 24)),
+      child: Text('Academia', style: TextStyle(color: Colors.black, fontSize: 24)),
     );
   }
 }
