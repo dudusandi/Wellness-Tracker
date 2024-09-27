@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'calendario.dart';
-import 'exames.dart';
-import 'academia.dart';
+import '../Menus/calendario.dart';
+import '../Menus/exames.dart';
+import '../Menus/academia.dart';
 import 'ficha_medica.dart';
 import 'novo_exame.dart';
 
