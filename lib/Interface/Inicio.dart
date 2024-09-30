@@ -9,7 +9,6 @@ void main() {
   runApp(MyApp());
 }
 
-//testes
 
 class MyApp extends StatelessWidget {
   @override
