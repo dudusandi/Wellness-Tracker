@@ -4,6 +4,7 @@ import '../Interface/exames.dart';
 import '../Interface/academia.dart';
 import 'ficha_medica.dart';
 import 'novo_exame.dart';
+import 'ExameSangue.dart';
 
 void main() {
   runApp(MyApp());
