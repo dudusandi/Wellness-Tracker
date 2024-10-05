@@ -27,12 +27,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  // Inicializamos a lista de páginas diretamente aqui
+
   final List<Widget> _pages = [
     MainContent(),
     Exames(),
     FichaMedica(),
-    NovoExame(exames: [], examesPredefinidos: [],), // Não precisamos passar exames aqui
+    NovoExame(), 
     Calendario(),
     Academia(),
   ];
