@@ -3,13 +3,12 @@ import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
 import '../Interface/academia.dart';
 import 'ficha_medica.dart';
-import 'novo_exame.dart';
-import 'ExameSangue.dart';
+import 'novo_exame.dart'; // Ajuste o nome do arquivo para seguir as convenções
+import 'Exame_Sangue.dart';
 
 void main() {
   runApp(MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -28,11 +27,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
+  // Inicializamos a lista de páginas diretamente aqui
   final List<Widget> _pages = [
     MainContent(),
     Exames(),
     FichaMedica(),
-    NovoExame(),
+    NovoExame(exames: [], examesPredefinidos: [],), // Não precisamos passar exames aqui
     Calendario(),
     Academia(),
   ];
@@ -85,7 +85,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   Widget _buildMenuItem(IconData icon, String title, int index) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
@@ -98,7 +97,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
 
 class MainContent extends StatefulWidget {
   @override
@@ -304,71 +302,6 @@ class _MainContentState extends State<MainContent> {
                     color: Colors.white,
                     thickness: 1,
                   ),
-                  // Segunda Coluna
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Batimentos',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '109 BPM',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      Divider(color: Colors.white, thickness: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Vitamina B',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '109 UI',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      Divider(color: Colors.white, thickness: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Vitamina D',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '509 UI',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      Divider(color: Colors.white, thickness: 2),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Vitamina E',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '85 UI',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
                 ],
               ),
             ),
@@ -378,13 +311,3 @@ class _MainContentState extends State<MainContent> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
