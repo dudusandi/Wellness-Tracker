@@ -1,3 +1,4 @@
+import 'package:beta1/Interface/login.dart';
 import 'package:flutter/material.dart';
 import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
@@ -13,17 +14,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: Inicio(),
     );
   }
 }
 
-class HomeScreen extends StatefulWidget {
+class Inicio extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _InicioState createState() => _InicioState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _InicioState extends State<Inicio> {
   int _selectedIndex = 0;
 
 
@@ -111,9 +112,32 @@ class _MainContentState extends State<MainContent> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Bem Vindo, Eduardo Sandi',
-            style: TextStyle(color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
+          Row(
+            children: [
+              Expanded(
+                flex: 4,
+                child: Text(
+                  'Bem Vindo, Eduardo Sandi',
+                  style: TextStyle(color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: 
+              GestureDetector(
+              onTap: () {
+                // Navegar para a página de cadastro
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              },
+              child: Text(
+                "Sair da Conta",
+                style: TextStyle(color: const Color.fromARGB(255, 156, 96, 91), fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+            ))
+            ],
           ),
           SizedBox(height: 80),
           Text('Dados Recentes', style: TextStyle(color: Colors.white, fontFamily: 'JuliusSansOne', fontSize: 16)),
