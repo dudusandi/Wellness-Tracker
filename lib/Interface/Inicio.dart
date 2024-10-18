@@ -6,9 +6,6 @@ import '../Interface/academia.dart';
 import 'ficha_medica.dart';
 import 'novo_exame.dart'; // Ajuste o nome do arquivo para seguir as convenções
 
-void main() {
-  runApp(MyApp());
-}
 
 class MyApp extends StatelessWidget {
   @override

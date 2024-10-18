@@ -62,8 +62,10 @@ class _LoginState extends State<Login> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.white),
               child: TextField(
+                obscureText: true,
                 style: TextStyle(),
                 decoration: InputDecoration(
+
                     labelText: "Senha", border: InputBorder.none),
               ),
             ),
