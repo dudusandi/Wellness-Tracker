@@ -4,7 +4,6 @@ import '../Interface/exames.dart';
 import '../Interface/academia.dart';
 import 'ficha_medica.dart';
 import 'novo_exame.dart'; // Ajuste o nome do arquivo para seguir as convenções
-import 'Exame_Sangue.dart';
 
 void main() {
   runApp(MyApp());
