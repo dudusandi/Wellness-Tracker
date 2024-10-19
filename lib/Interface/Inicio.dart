@@ -6,17 +6,22 @@ import '../Interface/academia.dart';
 import 'ficha_medica.dart';
 import 'novo_exame.dart'; 
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Inicio(),
+      home: Inicio(usuario: {}), // Passando um usuário vazio por padrão
     );
   }
 }
 
 class Inicio extends StatefulWidget {
+  final Map<String, dynamic> usuario; // Mudamos para um Map não opcional.
+
+  Inicio({Key? key, Map<String, dynamic>? usuario}) 
+    : usuario = usuario ?? {}, // Inicializa com um mapa vazio se usuario for nulo
+      super(key: key);
+
   @override
   _InicioState createState() => _InicioState();
 }
@@ -24,15 +29,21 @@ class Inicio extends StatefulWidget {
 class _InicioState extends State<Inicio> {
   int _selectedIndex = 0;
 
+  late List<Widget> _pages; // Declarado como late para ser inicializado depois
 
-  final List<Widget> _pages = [
-    MainContent(),
-    Exames(),
-    FichaMedica(),
-    NovoExame(), 
-    Calendario(),
-    Academia(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    // Inicializa a lista de páginas no initState
+    _pages = [
+      MainContent(usuario: widget.usuario), // Passa o usuario para MainContent
+      Exames(),
+      FichaMedica(),
+      NovoExame(),
+      Calendario(),
+      Academia(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +71,7 @@ class _InicioState extends State<Inicio> {
                   SizedBox(height: 30),
                   _buildMenuItem(Icons.add, 'Novo Exame', 3),
                   SizedBox(height: 30),
-                   _buildMenuItem(Icons.assignment, 'Ver Exames', 1),
+                  _buildMenuItem(Icons.assignment, 'Ver Exames', 1),
                   SizedBox(height: 30),
                   _buildMenuItem(Icons.favorite, 'Ficha Médica', 2),
                   SizedBox(height: 30),
@@ -72,7 +83,7 @@ class _InicioState extends State<Inicio> {
             ),
           ),
           Expanded(
-            child: _pages[_selectedIndex],
+            child: _pages[_selectedIndex], 
           ),
         ],
       ),
@@ -92,12 +103,11 @@ class _InicioState extends State<Inicio> {
   }
 }
 
-class MainContent extends StatefulWidget {
-  @override
-  _MainContentState createState() => _MainContentState();
-}
+class MainContent extends StatelessWidget {
+  final Map<String, dynamic> usuario; // Agora também é um Map não opcional.
 
-class _MainContentState extends State<MainContent> {
+  MainContent({Key? key, required this.usuario}) : super(key: key); // Construtor que aceita usuario.
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -111,26 +121,26 @@ class _MainContentState extends State<MainContent> {
               Expanded(
                 flex: 4,
                 child: Text(
-                  'Bem Vindo, Eduardo Sandi',
+                  'Bem Vindo, ${usuario['nome'] ?? 'Usuário'}!', // Usando o nome do usuário, ou "Usuário" se não houver.
                   style: TextStyle(color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
                 ),
               ),
               Expanded(
                 flex: 1,
-                child: 
-              GestureDetector(
-              onTap: () {
-                // Navegar para a página de cadastro
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-              child: Text(
-                "Sair da Conta",
-                style: TextStyle(color: const Color.fromARGB(255, 156, 96, 91), fontWeight: FontWeight.bold, fontSize: 20),
+                child: GestureDetector(
+                  onTap: () {
+                    // Navegar para a página de login
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
+                  child: Text(
+                    "Sair da Conta",
+                    style: TextStyle(color: const Color.fromARGB(255, 156, 96, 91), fontWeight: FontWeight.bold, fontSize: 20),
+                  ),
+                ),
               ),
-            ))
             ],
           ),
           SizedBox(height: 80),
@@ -158,7 +168,7 @@ class _MainContentState extends State<MainContent> {
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    'Glicose 92%',
+                                    'Glicose 92%', // Essa informação pode ser dinamicamente alterada no futuro.
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -249,8 +259,7 @@ class _MainContentState extends State<MainContent> {
               padding: const EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                ],
+                children: [],
               ),
             ),
           )

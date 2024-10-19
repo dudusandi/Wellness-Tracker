@@ -17,7 +17,7 @@ Future<void> criarUsuario(String nome, String dataNascimento, String email, Stri
       'INSERT INTO usuarios (nome, data_nascimento, email, senha) VALUES (?, ?, ?, ?)',
       [nome, dataNascimento, email, senha]
     );
-  print('Usuário $nome adicionado com sucesso!'); // Confirmação de que o usuário foi adicionado.
+  print('Usuário $nome adicionado com sucesso!'); 
   db.dispose();
 }
 
@@ -38,6 +38,28 @@ Future<bool> logar(String email, String senha) async {
   return result.isNotEmpty;
 }
 
+ Future<Map<String, dynamic>?> obterUsuarioPorEmail(String email) async {
+    DynamicLibrary.open('assets/sqlite3.dll');
+  final directory = await getApplicationDocumentsDirectory();
+  final dbPath = join(directory.path, 'WellnessTrackerDatabase.db');
+  final Database db = sqlite3.open(dbPath);
+
+    final result = db.select('''
+      SELECT * FROM usuarios 
+      WHERE email = ?
+    ''', [email]);
+
+    if (result.isNotEmpty) {
+      return {
+        'id': result.first['id'],
+        'nome': result.first['nome'],
+        'data_nascimento': result.first['data_nascimento'],
+        'email': result.first['email'],
+      };
+    }
+
+    return null; // Retorna null se o usuário não for encontrado
+  }
 
 
 }
