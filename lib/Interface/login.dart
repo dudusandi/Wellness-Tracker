@@ -74,6 +74,9 @@ class _LoginState extends State<Login> {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.white),
               child: TextField(
+                onSubmitted: (value) {
+                  _realizarLogin();
+                },
                 style: TextStyle(),
                 controller: _loginEmailController,
                 decoration: InputDecoration(
@@ -91,6 +94,9 @@ class _LoginState extends State<Login> {
                   color: Colors.white),
               child: TextField(
                 obscureText: true,
+                onSubmitted: (value) {
+                  _realizarLogin();
+                },
                 style: TextStyle(),
                 controller: _loginSenhaController,
                 decoration: InputDecoration(
