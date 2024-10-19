@@ -72,10 +72,7 @@ class _InicioState extends State<Inicio> {
             ),
           ),
           Expanded(
-            child: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
-              child: _pages[_selectedIndex],
-            ),
+            child: _pages[_selectedIndex],
           ),
         ],
       ),
@@ -253,75 +250,6 @@ class _MainContentState extends State<MainContent> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Primeira Coluna
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Batimentos',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '109 BPM',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      Divider(color: Colors.white, thickness: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Vitamina B',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '109 UI',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      Divider(color: Colors.white, thickness: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Vitamina D',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '509 UI',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                      Divider(color: Colors.white, thickness: 1),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Vitamina E',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                          SizedBox(width: 10),
-                          Text(
-                            '85 UI',
-                            style: TextStyle(color: Colors.white, fontSize: 16),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  VerticalDivider(
-                    color: Colors.white,
-                    thickness: 1,
-                  ),
                 ],
               ),
             ),
