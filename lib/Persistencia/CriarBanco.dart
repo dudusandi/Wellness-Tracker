@@ -4,10 +4,7 @@ import 'package:path/path.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 
-void main() async {
-  await criarBancoDeDados();
-}
-
+class CriarBanco{
 Future<void> criarBancoDeDados() async {
 
   DynamicLibrary.open('assets/sqlite3.dll');
@@ -30,4 +27,4 @@ Future<void> criarBancoDeDados() async {
   
 
 }
-
+}

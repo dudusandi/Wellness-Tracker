@@ -1,6 +1,6 @@
 import 'package:WelnessTracker/Interface/login.dart';
+import 'package:WelnessTracker/Persistencia/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -17,6 +17,14 @@ class LoginCadastro extends StatefulWidget {
 }
 
 class _LoginCadastroState extends State<LoginCadastro> {
+
+  final GerenciarBanco _gerenciarBanco = GerenciarBanco();
+
+  final TextEditingController _nomeController = TextEditingController();
+  final TextEditingController _dataNascimentoController =TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,9 +53,11 @@ class _LoginCadastroState extends State<LoginCadastro> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
+                  controller: _nomeController,
                   style: TextStyle(),
                   decoration: InputDecoration(
-                      labelText: "Nome", border: InputBorder.none),
+                      labelText: "Nome", 
+                      border: InputBorder.none),
                 ),
               ),
               SizedBox(
@@ -59,6 +69,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
+                  controller: _dataNascimentoController,
                   style: TextStyle(),
                   decoration: InputDecoration(
                       labelText: "Data de Nascimento",
@@ -74,6 +85,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
+                  controller: _emailController,
                   style: TextStyle(),
                   decoration: InputDecoration(
                       labelText: "Email", border: InputBorder.none),
@@ -88,6 +100,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
+                  controller: _senhaController,
                   style: TextStyle(),
                   decoration: InputDecoration(
                       labelText: "Senha", border: InputBorder.none),
@@ -100,8 +113,17 @@ class _LoginCadastroState extends State<LoginCadastro> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                        onPressed: () {
-                          print("Criar Conta");
+                        onPressed: () async {
+                          await _gerenciarBanco.criarUsuario(
+                          _nomeController.text,
+                          _dataNascimentoController.text,
+                          _emailController.text,
+                          _senhaController.text,
+                        );
+                        _nomeController.clear();
+                        _dataNascimentoController.clear();
+                        _emailController.clear();
+                        _senhaController.clear();
                         },
                         child: Text("Criar Conta")),
                   ),
@@ -113,8 +135,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => Login()),
+                            MaterialPageRoute(builder: (context) => Login()),
                           );
                         },
                         child: Text("Voltar ao Inicio")),
