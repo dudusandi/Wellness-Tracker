@@ -1,5 +1,5 @@
-import 'package:beta1/Interface/Inicio.dart';
-import 'package:beta1/Interface/login_cadastro.dart';
+import 'package:WelnessTracker/Interface/Inicio.dart';
+import 'package:WelnessTracker/Interface/login_cadastro.dart';
 import 'package:flutter/material.dart';
 
 void main() {

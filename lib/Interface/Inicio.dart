@@ -1,10 +1,10 @@
-import 'package:beta1/Interface/login.dart';
+import 'package:WelnessTracker/Interface/login.dart';
 import 'package:flutter/material.dart';
 import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
 import '../Interface/academia.dart';
 import 'ficha_medica.dart';
-import 'novo_exame.dart'; // Ajuste o nome do arquivo para seguir as convenções
+import 'novo_exame.dart'; 
 
 
 class MyApp extends StatelessWidget {
