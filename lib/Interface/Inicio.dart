@@ -10,16 +10,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Inicio(usuario: {}), // Passando um usuário vazio por padrão
+      home: Inicio(usuario: {}), 
     );
   }
 }
 
 class Inicio extends StatefulWidget {
-  final Map<String, dynamic> usuario; // Mudamos para um Map não opcional.
+  final Map<String, dynamic> usuario; 
 
   Inicio({Key? key, Map<String, dynamic>? usuario}) 
-    : usuario = usuario ?? {}, // Inicializa com um mapa vazio se usuario for nulo
+    : usuario = usuario ?? {}, 
       super(key: key);
 
   @override
@@ -29,14 +29,13 @@ class Inicio extends StatefulWidget {
 class _InicioState extends State<Inicio> {
   int _selectedIndex = 0;
 
-  late List<Widget> _pages; // Declarado como late para ser inicializado depois
+  late List<Widget> _pages; 
 
   @override
   void initState() {
     super.initState();
-    // Inicializa a lista de páginas no initState
     _pages = [
-      MainContent(usuario: widget.usuario), // Passa o usuario para MainContent
+      MainContent(usuario: widget.usuario), 
       Exames(),
       FichaMedica(),
       NovoExame(),
@@ -104,9 +103,8 @@ class _InicioState extends State<Inicio> {
 }
 
 class MainContent extends StatelessWidget {
-  final Map<String, dynamic> usuario; // Agora também é um Map não opcional.
-
-  MainContent({Key? key, required this.usuario}) : super(key: key); // Construtor que aceita usuario.
+  final Map<String, dynamic> usuario; 
+  MainContent({Key? key, required this.usuario}) : super(key: key); 
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +119,7 @@ class MainContent extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: Text(
-                  'Bem Vindo, ${usuario['nome'] ?? 'Usuário'}!', // Usando o nome do usuário, ou "Usuário" se não houver.
+                  'Bem Vindo, ${usuario['nome'] ?? 'Usuário'}!',
                   style: TextStyle(color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
                 ),
               ),
@@ -129,7 +127,6 @@ class MainContent extends StatelessWidget {
                 flex: 1,
                 child: GestureDetector(
                   onTap: () {
-                    // Navegar para a página de login
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => Login()),
@@ -168,7 +165,7 @@ class MainContent extends StatelessWidget {
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    'Glicose 92%', // Essa informação pode ser dinamicamente alterada no futuro.
+                                    'Glicose NA', 
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -183,7 +180,7 @@ class MainContent extends StatelessWidget {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            'TAXA ACIMA DO NORMAL!',
+                            'NÃO DISPONIVEL',
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 12,
@@ -231,7 +228,7 @@ class MainContent extends StatelessWidget {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            'Oftalmologista na Sexta',
+                            'Demo',
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 12,

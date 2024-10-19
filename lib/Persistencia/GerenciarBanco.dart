@@ -58,7 +58,7 @@ Future<bool> logar(String email, String senha) async {
       };
     }
 
-    return null; // Retorna null se o usuário não for encontrado
+    return null; 
   }
 
 
