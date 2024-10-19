@@ -4,35 +4,30 @@ import 'package:path/path.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 
+void main() async {
+  await criarBancoDeDados();
+}
 
-Future<void> main() async {
+Future<void> criarBancoDeDados() async {
 
   DynamicLibrary.open('assets/sqlite3.dll');
+
   final directory = await getApplicationDocumentsDirectory();
   final dbPath = join(directory.path, 'WellnessTrackerDatabase.db');
   final Database db = sqlite3.open(dbPath);
 
   db.execute('''
-    CREATE TABLE IF NOT EXISTS test (
+    CREATE TABLE IF NOT EXISTS usuarios (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL
+      nome TEXT NOT NULL,
+      data_nascimento TEXT NOT NULL,
+      email TEXT NOT NULL UNIQUE,
+      senha TEXT NOT NULL
     )
   ''');
 
-  db.execute('INSERT INTO test (name) VALUES (?)', ['Sample Name']);
-
-  final ResultSet resultSet = db.select('SELECT * FROM test');
-  for (final Row row in resultSet) {
-    print('ID: ${row['id']}, Name: ${row['name']}');
-  }
-
   db.dispose();
   
-
-}
-
-class Criarbanco {
-
 
 }
 

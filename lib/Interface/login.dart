@@ -85,7 +85,6 @@ class _LoginState extends State<Login> {
             ),
             GestureDetector(
               onTap: () {
-                // Navegar para a página de cadastro
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => LoginCadastro()),
