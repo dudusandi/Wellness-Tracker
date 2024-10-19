@@ -165,7 +165,7 @@ class MainContent extends StatelessWidget {
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    'Glicose NA', 
+                                    'Não Disponivel', 
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -228,7 +228,7 @@ class MainContent extends StatelessWidget {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            'Demo',
+                            'NÃO DISPONIVEL',
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 12,
