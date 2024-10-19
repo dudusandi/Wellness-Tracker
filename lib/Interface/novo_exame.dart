@@ -121,17 +121,20 @@ class _NovoExameState extends State<NovoExame> {
                     padding: EdgeInsets.only(left: 10, right: 10),
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: Colors.white, ),
                     child: TextField(
+                    
                       controller: _valorController,
                       decoration:
-                          InputDecoration(labelText: 'Insira o valor do exame'),
+                          InputDecoration(
+                            labelText: _exameSelecionado != null
+                            ? _exameSelecionado!.unidade
+                            : 'Insira o valor do exame', ),
                       keyboardType: TextInputType.number,
                     ),
                   ),
                 )
               ],
             ),
-            SizedBox(height: 20),
-            SizedBox(height: 20),
+            SizedBox(height: 40),
             ElevatedButton(
               onPressed: () => {print("Adicionar Exame")},
               child: Text('Adicionar Exame'),
