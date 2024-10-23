@@ -36,7 +36,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
   sqlite3: ^2.4.6
-  path_provider: ^2.1.4
   window_manager: ^0.4.2
 
 dev_dependencies:
