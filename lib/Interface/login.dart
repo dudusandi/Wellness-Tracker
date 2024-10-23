@@ -3,10 +3,29 @@ import 'package:WelnessTracker/Interface/login_cadastro.dart';
 import 'package:WelnessTracker/Persistencia/CriarBanco.dart';
 import 'package:WelnessTracker/Persistencia/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
 CriarBanco _criarBanco = CriarBanco();
 GerenciarBanco _gerenciarBanco = GerenciarBanco();
-void main() {
+void main() async{
+  
+    WidgetsFlutterBinding.ensureInitialized();
+     await windowManager.ensureInitialized();
+
+    WindowOptions windowOptions = WindowOptions(
+    size: Size(1280, 720),
+    minimumSize: Size(1280, 720),
+    center: true,
+    backgroundColor: Colors.transparent,
+    skipTaskbar: false,
+    titleBarStyle: TitleBarStyle.hidden,
+    );
+
+     windowManager.waitUntilReadyToShow(windowOptions, () async {
+    await windowManager.show();
+    await windowManager.focus();
+    });
+
   runApp(MyApp());
   _criarBanco.criarBancoDeDados();
 }
