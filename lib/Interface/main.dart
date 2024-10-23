@@ -13,12 +13,12 @@ void main() async{
      await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = WindowOptions(
-    size: Size(1280, 720),
-    minimumSize: Size(1280, 720),
+    size: Size(1280, 800),
+    minimumSize: Size(1280, 800),
     center: true,
-    backgroundColor: Colors.transparent,
-    skipTaskbar: false,
-    titleBarStyle: TitleBarStyle.hidden,
+    title: "WelnessTracker",
+    windowButtonVisibility: true,
+    titleBarStyle: TitleBarStyle.normal,
     );
 
      windowManager.waitUntilReadyToShow(windowOptions, () async {
