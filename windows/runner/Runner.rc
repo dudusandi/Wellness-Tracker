@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.ucs" "\0"
-            VALUE "FileDescription", "beta1" "\0"
+            VALUE "FileDescription", "WelnessTracker" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "beta1" "\0"
+            VALUE "InternalName", "WelnessTracker" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.ucs. All rights reserved." "\0"
-            VALUE "OriginalFilename", "beta1.exe" "\0"
-            VALUE "ProductName", "beta1" "\0"
+            VALUE "OriginalFilename", "WelnessTracker.exe" "\0"
+            VALUE "ProductName", "WelnessTracker" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
