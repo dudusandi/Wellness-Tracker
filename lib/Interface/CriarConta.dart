@@ -1,5 +1,5 @@
 import 'package:WelnessTracker/Controlador/Funcoes.dart';
-import 'package:WelnessTracker/Interface/main.dart';
+import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
 

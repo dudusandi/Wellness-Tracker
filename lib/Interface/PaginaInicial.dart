@@ -1,11 +1,11 @@
-import 'package:WelnessTracker/Interface/main.dart';
+import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 
-class MainContent extends StatelessWidget {
+class PaginaInicial extends StatelessWidget {
 
   final Usuario usuario; 
-  MainContent({Key? key, required this.usuario}) : super(key: key);
+  PaginaInicial({Key? key, required this.usuario}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class MainContent extends StatelessWidget {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            'NÃO DISPONIVEL',
+                            'Resumo sobre sua Saúde',
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 12,

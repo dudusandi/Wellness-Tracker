@@ -23,7 +23,7 @@ Future<void> criarExame(Exame exame,int usuarioID) async {
   final db = sqlite3.open(banco);
 
     db.execute(
-      'INSERT INTO exames (nome, data_exame, valor, usuarioID) VALUES (?, ?, ?, ?)',
+      'INSERT INTO exames (nome, data_exame, valor, usuario_id) VALUES (?, ?, ?, ?)',
       [exame.nome, exame.dataExame, exame.valor, exame.usuarioId]
     );
   db.dispose();

@@ -1,12 +1,12 @@
-import 'package:WelnessTracker/Interface/main.dart';
-import 'package:WelnessTracker/Interface/main_content.dart';
+import 'package:WelnessTracker/Interface/Login.dart';
+import 'package:WelnessTracker/Interface/PaginaInicial.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
 import '../Interface/academia.dart';
 import 'ficha_medica.dart';
-import 'novo_exame.dart';
+import 'NovoExame.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -38,7 +38,7 @@ class _InicioState extends State<Inicio> {
   void initState() {
     super.initState();
     _pages = [
-      MainContent(usuario: widget.usuario,),
+      PaginaInicial(usuario: widget.usuario,),
       Exames(),
       FichaMedica(),
       NovoExame(),

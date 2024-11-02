@@ -1,4 +1,3 @@
-import 'package:WelnessTracker/Estado/UsuarioLogado%20.dart';
 import 'package:WelnessTracker/Model/Exame.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
@@ -20,22 +19,7 @@ class Funcoes {
     await gerenciarBanco.criarUsuario(novoUsuario);
   }
 
-void fazerLogin(String email, String senha) async {
-  bool loginSucesso = await gerenciarBanco.logar(email, senha);
-  if (loginSucesso) {
-    Map<String, dynamic>? usuarioDados = (await gerenciarBanco.obterUsuarioPorEmail(email)) as Map<String, dynamic>?;
-    if (usuarioDados != null) {
-      Usuario usuario = Usuario(
-        id: usuarioDados['id'],
-        nome: usuarioDados['nome'],
-        dataNascimento: usuarioDados['data_nascimento'],
-        email: usuarioDados['email'],
-        senha: senha, // Não é seguro armazenar a senha, considere removê-la
-      );
-      UsuarioLogado.setUsuario(usuario); // Armazena o usuário logado
-    }
-  }
-}
+
 
 
 

@@ -1,6 +1,7 @@
 import 'package:WelnessTracker/Controlador/Funcoes.dart';
-import 'package:WelnessTracker/Estado/UsuarioLogado%20.dart';
+import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:WelnessTracker/Model/UsuarioLogado.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -48,14 +49,22 @@ class NovoExame extends StatefulWidget {
   _NovoExameState createState() => _NovoExameState();
 }
 
+
+
 class _NovoExameState extends State<NovoExame> {
+  late Funcoes funcoes;
+
+  @override
+  void initState() {
+    super.initState();
+    funcoes = Funcoes(GerenciarBanco());
+  }
 
   var maskFormatter = new MaskTextInputFormatter(
-  mask: "##/##/####",
-);
+    mask: "##/##/####",
+  );
 
-  Usuario? usuarioLogado = UsuarioLogado.usuario;
-  late Funcoes funcoes;
+  final int? usuarioId = UsuarioLogado.usuario?.id;
   ExameSangue? _exameSelecionado;
   final TextEditingController _valorController = TextEditingController();
   final TextEditingController _dataController = TextEditingController();
@@ -154,15 +163,15 @@ class _NovoExameState extends State<NovoExame> {
             SizedBox(height: 40),
             ElevatedButton(
               onPressed: () => {
-                   if (_exameSelecionado != null && UsuarioLogado.usuario != null) {
-                      funcoes.criarExame(
+                  if (_exameSelecionado != null && usuarioId != null) {
+                  funcoes.criarExame(
                     _exameSelecionado!.nome,
                     _dataController.text,
                     _valorController.text,
-                    UsuarioLogado.usuario!.id!, 
-    )
-  }
-              
+                    usuarioId!, 
+                  )
+    }
+                  
               },
               child: Text('Adicionar Exame'),
             ),

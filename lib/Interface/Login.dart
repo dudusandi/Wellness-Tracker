@@ -1,10 +1,12 @@
-import 'package:WelnessTracker/Interface/Inicio.dart';
-import 'package:WelnessTracker/Interface/login_cadastro.dart';
+import 'package:WelnessTracker/Interface/Menu.dart';
+import 'package:WelnessTracker/Interface/CriarConta.dart';
 import 'package:WelnessTracker/Model/CriarBanco.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
+
+import '../Model/UsuarioLogado.dart';
 
 CriarBanco _criarBanco = CriarBanco();
 GerenciarBanco _gerenciarBanco = GerenciarBanco();
@@ -50,6 +52,8 @@ class _LoginState extends State<Login> {
   final TextEditingController _loginEmailController = TextEditingController();
   final TextEditingController _loginSenhaController = TextEditingController();
 
+  final int? usuarioId = UsuarioLogado.usuario?.id;
+
  Future<void> _realizarLogin() async {
   String email = _loginEmailController.text;
   String senha = _loginSenhaController.text;
@@ -57,9 +61,7 @@ class _LoginState extends State<Login> {
   bool sucesso = await _gerenciarBanco.logar(email, senha);
 
   if (sucesso) {
-    // Obtém os dados do usuário a partir do banco de dados
     var usuarioDados = await _gerenciarBanco.obterUsuarioPorEmail(email);
-
     if (usuarioDados != null) {
       Usuario usuario = Usuario(
         id: usuarioDados.id, 
@@ -68,7 +70,7 @@ class _LoginState extends State<Login> {
         email: usuarioDados.email,
         senha: senha, 
       );
-
+      UsuarioLogado.setUsuario(usuario); 
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Inicio(usuario: usuario)),
