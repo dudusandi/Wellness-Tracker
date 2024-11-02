@@ -1,7 +1,7 @@
 import 'package:WelnessTracker/Interface/Inicio.dart';
 import 'package:WelnessTracker/Interface/login_cadastro.dart';
-import 'package:WelnessTracker/Persistencia/CriarBanco.dart';
-import 'package:WelnessTracker/Persistencia/GerenciarBanco.dart';
+import 'package:WelnessTracker/Model/CriarBanco.dart';
+import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 

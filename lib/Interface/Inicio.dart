@@ -4,23 +4,23 @@ import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
 import '../Interface/academia.dart';
 import 'ficha_medica.dart';
-import 'novo_exame.dart'; 
+import 'novo_exame.dart';
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Inicio(usuario: {}), 
+      home: Inicio(usuario: {}),
     );
   }
 }
 
 class Inicio extends StatefulWidget {
-  final Map<String, dynamic> usuario; 
+  final Map<String, dynamic> usuario;
 
-  Inicio({Key? key, Map<String, dynamic>? usuario}) 
-    : usuario = usuario ?? {}, 
-      super(key: key);
+  Inicio({Key? key, Map<String, dynamic>? usuario})
+      : usuario = usuario ?? {},
+        super(key: key);
 
   @override
   _InicioState createState() => _InicioState();
@@ -29,13 +29,13 @@ class Inicio extends StatefulWidget {
 class _InicioState extends State<Inicio> {
   int _selectedIndex = 0;
 
-  late List<Widget> _pages; 
+  late List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
     _pages = [
-      MainContent(usuario: widget.usuario), 
+      MainContent(usuario: widget.usuario),
       Exames(),
       FichaMedica(),
       NovoExame(),
@@ -82,7 +82,7 @@ class _InicioState extends State<Inicio> {
             ),
           ),
           Expanded(
-            child: _pages[_selectedIndex], 
+            child: _pages[_selectedIndex],
           ),
         ],
       ),
@@ -92,7 +92,9 @@ class _InicioState extends State<Inicio> {
   Widget _buildMenuItem(IconData icon, String title, int index) {
     return ListTile(
       leading: Icon(icon, color: Colors.white),
-      title: Text(title, style: TextStyle(color: Colors.white, fontFamily: 'JuliusSansOne', fontSize: 20)),
+      title: Text(title,
+          style: TextStyle(
+              color: Colors.white, fontFamily: 'JuliusSansOne', fontSize: 20)),
       onTap: () {
         setState(() {
           _selectedIndex = index;
@@ -103,14 +105,14 @@ class _InicioState extends State<Inicio> {
 }
 
 class MainContent extends StatelessWidget {
-  final Map<String, dynamic> usuario; 
-  MainContent({Key? key, required this.usuario}) : super(key: key); 
+  final Map<String, dynamic> usuario;
+  MainContent({Key? key, required this.usuario}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Color(0xFF472B2B),
-      padding: EdgeInsets.all(60),
+      padding: EdgeInsets.only(top: 50, bottom: 20, left: 50, right: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -120,7 +122,10 @@ class MainContent extends StatelessWidget {
                 flex: 4,
                 child: Text(
                   'Bem Vindo, ${usuario['nome'] ?? 'Usuário'}!',
-                  style: TextStyle(color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 32,
+                      fontFamily: 'JuliusSansOne'),
                 ),
               ),
               Expanded(
@@ -134,14 +139,21 @@ class MainContent extends StatelessWidget {
                   },
                   child: Text(
                     "Sair da Conta",
-                    style: TextStyle(color: const Color.fromARGB(255, 156, 96, 91), fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                        color: const Color.fromARGB(255, 156, 96, 91),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(height: 80),
-          Text('Dados Recentes', style: TextStyle(color: Colors.white, fontFamily: 'JuliusSansOne', fontSize: 16)),
+          Text('Dados Recentes',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'JuliusSansOne',
+                  fontSize: 16)),
           SizedBox(height: 20),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -165,7 +177,7 @@ class MainContent extends StatelessWidget {
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    'Não Disponivel', 
+                                    'Requer Atenção',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -207,13 +219,14 @@ class MainContent extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.calendar_month, color: Colors.lightBlueAccent, size: 80),
+                            Icon(Icons.calendar_month,
+                                color: Colors.lightBlueAccent, size: 80),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    'Próxima Consulta',
+                                    '25/04/2020',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -228,7 +241,7 @@ class MainContent extends StatelessWidget {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            'NÃO DISPONIVEL',
+                            'Data do Ultimo Exame',
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 12,
@@ -244,19 +257,54 @@ class MainContent extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 40),
-          Text('Informações Gerais', style: TextStyle(color: Colors.white, fontFamily: 'JuliusSansOne', fontSize: 16)),
-          SizedBox(height: 40),
-          Card(
-            color: Color(0xFF351A1A),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [],
+          SizedBox(height: 20),
+          Text('Resumo Médico',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'JuliusSansOne',
+                  fontSize: 16)),
+          SizedBox(height: 20),
+          Expanded(
+            child: Container(
+              width: 3000,
+              height: 3000,
+              padding: EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 5),
+              decoration: BoxDecoration(
+
+                  borderRadius: BorderRadius.circular(20),
+                  color: Color(0xFF351A1A)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Hemograma Completo: Dentro dos valores normais, indicando que não há sinais de anemia, infecções ou problemas de coagulação",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Função Tireoidiana: TSH e T4 Livre normais, indicando que a tireoide está funcionando adequadamente.",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Text(
+                    "Glicemia em Jejum: Dentro do esperado, sugerindo controle adequado dos níveis de glicose no sangue.",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           )

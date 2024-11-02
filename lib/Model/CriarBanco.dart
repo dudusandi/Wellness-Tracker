@@ -13,7 +13,13 @@ final db = sqlite3.open(banco);
       data_nascimento TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
       senha TEXT NOT NULL
-    )
+      );
+    CREATE TABLE IF NOT EXISTS exames (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT,
+      data_exame DATE,
+      valor TEXT
+    );
   ''');
 
   db.dispose();

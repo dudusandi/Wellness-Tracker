@@ -1,5 +1,6 @@
+import 'package:WelnessTracker/Controlador/Funcoes.dart';
 import 'package:WelnessTracker/Interface/main.dart';
-import 'package:WelnessTracker/Persistencia/GerenciarBanco.dart';
+import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -18,7 +19,7 @@ class LoginCadastro extends StatefulWidget {
 
 class _LoginCadastroState extends State<LoginCadastro> {
 
-  final GerenciarBanco _gerenciarBanco = GerenciarBanco();
+  final Funcoes funcoes = Funcoes(GerenciarBanco());
 
   final TextEditingController _nomeController = TextEditingController();
   final TextEditingController _dataNascimentoController =TextEditingController();
@@ -114,7 +115,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () async {
-                          await _gerenciarBanco.criarUsuario(
+                          await funcoes.adicionarUsuario(
                           _nomeController.text,
                           _dataNascimentoController.text,
                           _emailController.text,
