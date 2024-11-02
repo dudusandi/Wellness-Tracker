@@ -17,6 +17,7 @@ Future<void> criarUsuario(String nome, String dataNascimento, String email, Stri
   db.dispose();
 }
 
+
 Future<bool> logar(String email, String senha) async {
   final banco = 'banco.db';
   final db = sqlite3.open(banco);
