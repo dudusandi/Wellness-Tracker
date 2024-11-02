@@ -120,6 +120,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                           _dataNascimentoController.text,
                           _emailController.text,
                           _senhaController.text,
+                          
                         );
                         _nomeController.clear();
                         _dataNascimentoController.clear();

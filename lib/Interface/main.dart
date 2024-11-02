@@ -2,6 +2,7 @@ import 'package:WelnessTracker/Interface/Inicio.dart';
 import 'package:WelnessTracker/Interface/login_cadastro.dart';
 import 'package:WelnessTracker/Model/CriarBanco.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
+import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Login extends StatefulWidget {
+
   @override
   _LoginState createState() => _LoginState();
 }
@@ -48,24 +50,36 @@ class _LoginState extends State<Login> {
   final TextEditingController _loginEmailController = TextEditingController();
   final TextEditingController _loginSenhaController = TextEditingController();
 
-  Future<void> _realizarLogin() async {
-    String email = _loginEmailController.text;
-    String senha = _loginSenhaController.text;
+ Future<void> _realizarLogin() async {
+  String email = _loginEmailController.text;
+  String senha = _loginSenhaController.text;
 
-    bool sucesso = await _gerenciarBanco.logar(email, senha);
+  bool sucesso = await _gerenciarBanco.logar(email, senha);
 
-    if (sucesso) {
-      var usuario = await _gerenciarBanco.obterUsuarioPorEmail(email);
-    Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Inicio(usuario: usuario)), 
+  if (sucesso) {
+    // Obtém os dados do usuário a partir do banco de dados
+    var usuarioDados = await _gerenciarBanco.obterUsuarioPorEmail(email);
+
+    if (usuarioDados != null) {
+      Usuario usuario = Usuario(
+        id: usuarioDados.id, 
+        nome: usuarioDados.nome,
+        dataNascimento: usuarioDados.dataNascimento,
+        email: usuarioDados.email,
+        senha: senha, 
       );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Email ou senha incorretos")),
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Inicio(usuario: usuario)),
       );
     }
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Email ou senha incorretos")),
+    );
   }
+}
 
   @override
   Widget build(BuildContext context) {

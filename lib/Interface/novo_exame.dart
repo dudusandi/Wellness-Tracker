@@ -1,3 +1,6 @@
+import 'package:WelnessTracker/Controlador/Funcoes.dart';
+import 'package:WelnessTracker/Estado/UsuarioLogado%20.dart';
+import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
@@ -51,7 +54,8 @@ class _NovoExameState extends State<NovoExame> {
   mask: "##/##/####",
 );
 
-
+  Usuario? usuarioLogado = UsuarioLogado.usuario;
+  late Funcoes funcoes;
   ExameSangue? _exameSelecionado;
   final TextEditingController _valorController = TextEditingController();
   final TextEditingController _dataController = TextEditingController();
@@ -149,7 +153,17 @@ class _NovoExameState extends State<NovoExame> {
                 )),
             SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () => {print(_exameSelecionado?.nome), print(_valorController.text),print(_dataController.text)},
+              onPressed: () => {
+                   if (_exameSelecionado != null && UsuarioLogado.usuario != null) {
+                      funcoes.criarExame(
+                    _exameSelecionado!.nome,
+                    _dataController.text,
+                    _valorController.text,
+                    UsuarioLogado.usuario!.id!, 
+    )
+  }
+              
+              },
               child: Text('Adicionar Exame'),
             ),
           ],

@@ -18,13 +18,13 @@ Future<void> criarUsuario(Usuario usuario) async {
   db.dispose();
 }
 
-Future<void> criarExame(Exame exame) async {
+Future<void> criarExame(Exame exame,int usuarioID) async {
   final banco = 'banco.db';
   final db = sqlite3.open(banco);
 
     db.execute(
-      'INSERT INTO exames (nome, data_exame, valor) VALUES (?, ?, ?)',
-      [exame.nome, exame.dataExame, exame.valor]
+      'INSERT INTO exames (nome, data_exame, valor, usuarioID) VALUES (?, ?, ?, ?)',
+      [exame.nome, exame.dataExame, exame.valor, exame.usuarioId]
     );
   db.dispose();
 }
@@ -45,26 +45,30 @@ Future<bool> logar(String email, String senha) async {
   return result.isNotEmpty;
 }
 
- Future<Map<String, dynamic>?> obterUsuarioPorEmail(String email) async {
+Future<Usuario?> obterUsuarioPorEmail(String email) async {
   final banco = 'banco.db';
   final db = sqlite3.open(banco);
 
-    final result = db.select('''
-      SELECT * FROM usuarios 
-      WHERE email = ?
-    ''', [email]);
+  final result = db.select('''
+    SELECT * FROM usuarios 
+    WHERE email = ?
+  ''', [email]);
 
-    if (result.isNotEmpty) {
-      return {
-        'id': result.first['id'],
-        'nome': result.first['nome'],
-        'data_nascimento': result.first['data_nascimento'],
-        'email': result.first['email'],
-      };
-    }
+  db.dispose(); 
 
-    return null; 
+  if (result.isNotEmpty) {
+    final usuarioData = result.first;
+    return Usuario(
+      id: usuarioData['id'], 
+      nome: usuarioData['nome'],
+      dataNascimento: usuarioData['data_nascimento'],
+      email: usuarioData['email'],
+      senha: '', 
+    );
   }
+
+  return null; 
+}
 
 
 }
