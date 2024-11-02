@@ -1,6 +1,5 @@
 import 'package:WelnessTracker/Controlador/Funcoes.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
-import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:WelnessTracker/Model/UsuarioLogado.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';

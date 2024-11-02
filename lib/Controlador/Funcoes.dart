@@ -11,6 +11,7 @@ class Funcoes {
             await gerenciarBanco.criarExame(NovoExame, usuarioID);
   }
 
+
   Future<void> adicionarUsuario(
       String nome, String dataNascimento, String email, String senha) async {
 
