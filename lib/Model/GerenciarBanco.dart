@@ -70,5 +70,24 @@ Future<Usuario?> obterUsuarioPorEmail(String email) async {
   return null; 
 }
 
+Future<List<Exame>> obterExamesPorUsuarioId(int usuarioId) async {
+  final banco = 'banco.db';
+  final db = sqlite3.open(banco);
+
+  final result = db.select(
+    'SELECT * FROM exames WHERE usuario_id = ?',
+    [usuarioId],
+  );
+
+  db.dispose();
+
+  return result.map((exameData) => Exame(
+      nome: exameData['nome'],
+      dataExame: exameData['data_exame'],
+      valor: exameData['valor'],
+      usuarioId: usuarioId,
+    )).toList();
+}
+
 
 }
