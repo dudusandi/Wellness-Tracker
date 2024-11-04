@@ -18,11 +18,11 @@ class LoginCadastro extends StatefulWidget {
 }
 
 class _LoginCadastroState extends State<LoginCadastro> {
-
   final Funcoes funcoes = Funcoes(GerenciarBanco());
 
   final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _dataNascimentoController =TextEditingController();
+  final TextEditingController _dataNascimentoController =
+      TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
 
@@ -57,8 +57,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                   controller: _nomeController,
                   style: TextStyle(),
                   decoration: InputDecoration(
-                      labelText: "Nome", 
-                      border: InputBorder.none),
+                      labelText: "Nome", border: InputBorder.none),
                 ),
               ),
               SizedBox(
@@ -116,16 +115,19 @@ class _LoginCadastroState extends State<LoginCadastro> {
                     child: ElevatedButton(
                         onPressed: () async {
                           await funcoes.adicionarUsuario(
-                          _nomeController.text,
-                          _dataNascimentoController.text,
-                          _emailController.text,
-                          _senhaController.text,
-                          
-                        );
-                        _nomeController.clear();
-                        _dataNascimentoController.clear();
-                        _emailController.clear();
-                        _senhaController.clear();
+                            _nomeController.text,
+                            _dataNascimentoController.text,
+                            _emailController.text,
+                            _senhaController.text,
+                          );
+                          _nomeController.clear();
+                          _dataNascimentoController.clear();
+                          _emailController.clear();
+                          _senhaController.clear();
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                                content: Text("Conta criada com Sucesso!")),
+                          );
                         },
                         child: Text("Criar Conta")),
                   ),
