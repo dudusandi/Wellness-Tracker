@@ -72,8 +72,8 @@ class _FichaMedicaState extends State<FichaMedica> {
                         exerciseFrequency = value;
                       });
                     },
-                    activeColor: Colors.blue, // Cor do slider quando ativo
-                    inactiveColor: Colors.grey, // Cor do slider quando inativo
+                    activeColor: Colors.blue, 
+                    inactiveColor: Colors.grey, 
                   ),
     
                   Text(
@@ -110,7 +110,7 @@ class _FichaMedicaState extends State<FichaMedica> {
                 value: isSwitched,
                 onChanged: (value) {
                   setState(() {
-                    isSwitched = value; // Alterna o estado do switch
+                    isSwitched = value; 
                   });
                 },
                 activeColor: const Color.fromARGB(255, 255, 255, 255),
@@ -139,8 +139,6 @@ class _FichaMedicaState extends State<FichaMedica> {
                 ),
               ),
               SizedBox(width: 20),
-
-              // Segundo TextField
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(5),

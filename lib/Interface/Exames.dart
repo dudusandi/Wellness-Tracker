@@ -30,7 +30,7 @@ class _ExamesState extends State<Exames> {
 
   Future<void> _removerExame(int exameId) async {
       await _gerenciarBanco.removerExamePorId(exameId);
-      _carregarExames(); // Atualiza a lista após remoção
+      _carregarExames(); 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Exame removido com sucesso")),
       );
