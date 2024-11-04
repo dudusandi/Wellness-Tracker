@@ -179,25 +179,25 @@ class PaginaInicial extends StatelessWidget {
                   Text(
                     "Hemograma Completo: Dentro dos valores normais, indicando que não há sinais de anemia, infecções ou problemas de coagulação",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
                     "Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
                     "Função Tireoidiana: TSH e T4 Livre normais, indicando que a tireoide está funcionando adequadamente.",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
                     "Glicemia em Jejum: Dentro do esperado, sugerindo controle adequado dos níveis de glicose no sangue.",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xffF6F6F6),
                     ),
                   ),
                 ],
