@@ -48,8 +48,6 @@ class NovoExame extends StatefulWidget {
   _NovoExameState createState() => _NovoExameState();
 }
 
-
-
 class _NovoExameState extends State<NovoExame> {
   late Funcoes funcoes;
 
@@ -59,7 +57,7 @@ class _NovoExameState extends State<NovoExame> {
     funcoes = Funcoes(GerenciarBanco());
   }
 
-  var maskFormatter = new MaskTextInputFormatter(
+  var maskFormatter = MaskTextInputFormatter(
     mask: "##/##/####",
   );
 
@@ -162,15 +160,23 @@ class _NovoExameState extends State<NovoExame> {
             SizedBox(height: 40),
             ElevatedButton(
               onPressed: () => {
-                  if (_exameSelecionado != null && usuarioId != null) {
-                  funcoes.criarExame(
-                    _exameSelecionado!.nome,
-                    _dataController.text,
-                    _valorController.text,
-                    usuarioId!, 
-                  )
-    }
-                  
+                if (_exameSelecionado != null && usuarioId != null)
+                  {
+                    funcoes.criarExame(
+                      _exameSelecionado!.nome,
+                      _dataController.text,
+                      _valorController.text,
+                      usuarioId!,
+                    )
+                  },
+                setState(() {
+                  _exameSelecionado = null;
+                }),
+                _dataController.clear(),
+                _valorController.clear(),
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Exame Cadastrado com Sucesso")),
+                )
               },
               child: Text('Adicionar Exame'),
             ),

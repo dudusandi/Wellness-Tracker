@@ -82,12 +82,26 @@ Future<List<Exame>> obterExamesPorUsuarioId(int usuarioId) async {
   db.dispose();
 
   return result.map((exameData) => Exame(
+    id: exameData['id'],
       nome: exameData['nome'],
       dataExame: exameData['data_exame'],
       valor: exameData['valor'],
       usuarioId: usuarioId,
     )).toList();
 }
+
+  Future<void> removerExamePorId(int exameId) async {
+    final banco = 'banco.db';
+    final db = sqlite3.open(banco);
+
+    db.execute(
+      'DELETE FROM exames WHERE id = ?',
+      [exameId],
+    );
+
+    print('Exame com ID $exameId removido com sucesso!');
+    db.dispose();
+  }
 
 
 }

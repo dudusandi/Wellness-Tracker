@@ -19,11 +19,22 @@ class _ExamesState extends State<Exames> {
   }
 
   Future<void> _carregarExames() async {
-    int? usuarioID = UsuarioLogado.usuario!.id;
-    List<Exame> exames = await _gerenciarBanco.obterExamesPorUsuarioId(usuarioID!);
-    setState(() {
-      _exames = exames;
-    });
+    int? usuarioID = UsuarioLogado.usuario?.id;
+    if (usuarioID != null) {
+      List<Exame> exames = await _gerenciarBanco.obterExamesPorUsuarioId(usuarioID);
+      setState(() {
+        _exames = exames;
+      });
+    }
+  }
+
+  Future<void> _removerExame(int exameId) async {
+      await _gerenciarBanco.removerExamePorId(exameId);
+      _carregarExames(); // Atualiza a lista após remoção
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Exame removido com sucesso")),
+      );
+    
   }
 
   @override
@@ -59,6 +70,12 @@ class _ExamesState extends State<Exames> {
                     subtitle: Text(
                       'Data: ${exame.dataExame} - Valor: ${exame.valor}',
                       style: TextStyle(color: Colors.grey),
+                    ),
+                    trailing: IconButton(
+                      icon: Icon(Icons.delete, color: Colors.red),
+                      onPressed:  () async =>
+                         await _removerExame(exame.id!),
+                      
                     ),
                   );
                 },
