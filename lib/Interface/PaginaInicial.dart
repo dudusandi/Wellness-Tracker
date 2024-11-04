@@ -167,13 +167,13 @@ class PaginaInicial extends StatelessWidget {
             child: Container(
               width: 3000,
               height: 3000,
-              padding: EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 5),
+              padding: EdgeInsets.only(top: 10, right: 30, left: 30, bottom: 10),
               decoration: BoxDecoration(
 
                   borderRadius: BorderRadius.circular(20),
                   color: Color(0xFF351A1A)),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -182,21 +182,18 @@ class PaginaInicial extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
                   Text(
                     "Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.",
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
                   Text(
                     "Função Tireoidiana: TSH e T4 Livre normais, indicando que a tireoide está funcionando adequadamente.",
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(height: 10),
                   Text(
                     "Glicemia em Jejum: Dentro do esperado, sugerindo controle adequado dos níveis de glicose no sangue.",
                     style: TextStyle(
