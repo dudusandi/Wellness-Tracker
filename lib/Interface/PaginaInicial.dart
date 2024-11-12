@@ -72,33 +72,19 @@ Future<String> obterResumoHemograma(int usuarioID) async {
       return 'Dados incompletos para o hemograma.';
     }
 
-    String resumo = 'Resumo do Hemograma:\n';
+    // Inicializa a variável para o resumo simplificado
+    String resumo = "Hemograma Completo: ";
 
-    // Interpretação da Hemoglobina
-    if (hemoglobina >= 12 && hemoglobina <= 16) {
-      resumo += 'Hemoglobina está dentro do normal ($hemoglobina g/dL).\n';
-    } else if (hemoglobina < 12) {
-      resumo += 'Hemoglobina abaixo do normal ($hemoglobina g/dL), possível anemia.\n';
-    } else {
-      resumo += 'Hemoglobina acima do normal ($hemoglobina g/dL), possível policitemia.\n';
-    }
+    // Verifica os valores e gera um resumo simples
+    bool hemogramaNormal = true;
+    if (hemoglobina < 12 || hemoglobina > 16) hemogramaNormal = false;
+    if (leucocitos < 4000 || leucocitos > 11000) hemogramaNormal = false;
+    if (plaquetas < 150000 || plaquetas > 450000) hemogramaNormal = false;
 
-    // Interpretação dos Leucócitos
-    if (leucocitos >= 4000 && leucocitos <= 11000) {
-      resumo += 'Leucócitos dentro do normal ($leucocitos células/μL).\n';
-    } else if (leucocitos < 4000) {
-      resumo += 'Leucócitos abaixo do normal ($leucocitos células/μL), possível leucopenia.\n';
+    if (hemogramaNormal) {
+      resumo += "Dentro dos valores normais, indicando que não há sinais de anemia, infecções ou problemas de coagulação.";
     } else {
-      resumo += 'Leucócitos acima do normal ($leucocitos células/μL), possível infecção ou inflamação.\n';
-    }
-
-    // Interpretação das Plaquetas
-    if (plaquetas >= 150000 && plaquetas <= 450000) {
-      resumo += 'Plaquetas dentro do normal ($plaquetas células/μL).\n';
-    } else if (plaquetas < 150000) {
-      resumo += 'Plaquetas abaixo do normal ($plaquetas células/μL), possível trombocitopenia.\n';
-    } else {
-      resumo += 'Plaquetas acima do normal ($plaquetas células/μL), possível trombocitose.\n';
+      resumo += "Fora dos valores normais, podendo indicar algum distúrbio no sangue.";
     }
 
     return resumo;
