@@ -1,4 +1,4 @@
-import 'package:WelnessTracker/Controlador/Funcoes.dart';
+import 'package:WelnessTracker/Controlador/Controller.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/UsuarioLogado.dart';
 import 'package:flutter/material.dart';
