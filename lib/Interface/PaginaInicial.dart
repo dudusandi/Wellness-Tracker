@@ -1,4 +1,3 @@
-import 'package:WelnessTracker/Interface/Exames.dart';
 import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Model/Exame.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
@@ -26,7 +25,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
     _carregarDataUltimoExame();
     _carregarResumoHemograma();
     _carregarResumoPerfilLipidico();
-    
+    _carregarResumoTireoide();
+    _carregarResumoGlicemia();
+    _carregarResumoCompleto();
   }
 
   final GerenciarBanco _gerenciarBanco = GerenciarBanco();
@@ -34,6 +35,9 @@ class _PaginaInicialState extends State<PaginaInicial> {
   String resumo = "";
   String _resumoHemograma = 'Carregando...'; 
   String _resumoPerfilLipidico = 'Carregando...'; 
+  String _resumoTireoide = 'Carregando...'; 
+  String  _resumoGlicemia= 'Carregando...'; 
+  String _resumoCompleto= 'Carregando...'; 
 
 Future<void> _carregarDataUltimoExame() async {
   int? usuarioID = UsuarioLogado.usuario?.id;
@@ -64,20 +68,16 @@ DateTime _converterParaDateTime(String data) {
 
 Future<String> obterResumoHemograma(int usuarioID) async {
   try {
-    // Aguarda os valores dos exames, que são futuros
     double? hemoglobina = await _gerenciarBanco.obterValorExame(usuarioID, 'Hemoglobina');
     double? leucocitos = await _gerenciarBanco.obterValorExame(usuarioID, 'Leucócitos');
     double? plaquetas = await _gerenciarBanco.obterValorExame(usuarioID, 'Plaquetas');
 
-    // Se algum valor for nulo, retorna uma mensagem de erro
     if (hemoglobina == null || leucocitos == null || plaquetas == null) {
       return 'Dados incompletos para o hemograma.';
     }
 
-    // Inicializa a variável para o resumo simplificado
     String resumo = "Hemograma Completo: ";
 
-    // Verifica os valores e gera um resumo simples
     bool hemogramaNormal = true;
     if (hemoglobina < 12 || hemoglobina > 16) hemogramaNormal = false;
     if (leucocitos < 4000 || leucocitos > 11000) hemogramaNormal = false;
@@ -101,48 +101,40 @@ Future<String> obterResumoHemograma(int usuarioID) async {
     if (usuarioID != null) {
       String resumo = await obterResumoHemograma(usuarioID); // Chama a função
       setState(() {
-        _resumoHemograma = resumo; // Atualiza o estado com o resumo
+        _resumoHemograma = resumo; 
       });
     }
   }
 
 Future<String> obterResumoPerfilLipidico(int usuarioID) async {
   try {
-    // Obtém os valores dos exames
     double? colesterolTotal = await _gerenciarBanco.obterValorExame(usuarioID, 'Colesterol Total');
     double? colesterolHDL = await _gerenciarBanco.obterValorExame(usuarioID, 'Colesterol HDL');
     double? colesterolLDL = await _gerenciarBanco.obterValorExame(usuarioID, 'Colesterol LDL');
     double? triglicerideos = await _gerenciarBanco.obterValorExame(usuarioID, 'Triglicerídeos');
 
-    // Verifica se algum valor é nulo
     if (colesterolTotal == null || colesterolHDL == null || colesterolLDL == null || triglicerideos == null) {
       return 'Dados incompletos para o perfil lipídico.';
     }
 
-    // Checa se todos os exames estão dentro das faixas recomendadas
     bool perfilDentroDoNormal = true;
 
-    // Colesterol Total
     if (colesterolTotal >= 200) {
       perfilDentroDoNormal = false;
     }
 
-    // Colesterol HDL
     if (colesterolHDL <= 40) {
       perfilDentroDoNormal = false;
     }
 
-    // Colesterol LDL
     if (colesterolLDL >= 160) {
       perfilDentroDoNormal = false;
     }
 
-    // Triglicerídeos
     if (triglicerideos >= 150) {
       perfilDentroDoNormal = false;
     }
 
-    // Resumo baseado na avaliação
     if (perfilDentroDoNormal) {
       return 'Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.';
     } else {
@@ -153,13 +145,145 @@ Future<String> obterResumoPerfilLipidico(int usuarioID) async {
   }
 }
 
+Future<String> obterResumoTireoideSimples(int usuarioID) async {
+  try {
+    // Obtém os valores dos exames
+    double? tsh = await _gerenciarBanco.obterValorExame(usuarioID, 'TSH');
+    double? t4Livre = await _gerenciarBanco.obterValorExame(usuarioID, 'T4 Livre');
+
+    // Verifica se algum valor é nulo
+    if (tsh == null || t4Livre == null) {
+      return 'Dados incompletos para a análise da tireoide.';
+    }
+
+    bool tireoideDentroDoNormal = true;
+
+    if (tsh < 0.4 || tsh > 4.0) {  
+      tireoideDentroDoNormal = false;
+    }
+
+    if (t4Livre < 0.7 || t4Livre > 1.8) {  
+      tireoideDentroDoNormal = false;
+    }
+
+    if (tireoideDentroDoNormal) {
+      return 'Tireoide: Todos os valores estão dentro das faixas recomendadas, indicando funcionamento normal da tireoide.';
+    } else {
+      return 'Tireoide: Alguns valores estão fora das faixas recomendadas, podendo indicar disfunção tireoidiana.';
+    }
+  } catch (e) {
+    return 'Erro ao obter os dados da tireoide: $e';
+  }
+}
+
+Future<String> obterResumoGlicemiaSimples(int usuarioID) async {
+  try {
+    double? glicose = await _gerenciarBanco.obterValorExame(usuarioID, 'Glicose');
+
+    if (glicose == null) {
+      return 'Dados incompletos para a análise de glicemia.';
+    }
+
+    bool glicemiaDentroDoNormal = glicose >= 70 && glicose <= 99;
+
+    if (glicemiaDentroDoNormal) {
+      return 'Glicemia em Jejum: O valor da glicose está dentro da faixa recomendada, indicando controle adequado da glicemia.';
+    } else {
+      return 'Glicemia em Jejum: O valor da glicose está fora da faixa recomendada, podendo indicar risco de diabetes ou hipoglicemia.';
+    }
+  } catch (e) {
+    return 'Erro ao obter os dados da glicemia: $e';
+  }
+}
+
+Future<String> obterResumoCompleto(int usuarioID) async {
+  try {
+    String? resumoHemograma = await obterResumoHemograma(usuarioID);
+    String? resumoPerfilLipidico = await obterResumoPerfilLipidico(usuarioID);
+    String? resumoTireoide = await obterResumoTireoideSimples(usuarioID);
+    String? resumoGlicemia = await obterResumoGlicemiaSimples(usuarioID);
+
+
+    bool tudoOk = true;  
+
+    // Verifica o Hemograma
+    if (resumoHemograma != null) {
+      bool hemogramaOk = resumoHemograma.contains('Dentro dos valores normais, indicando que não há sinais de anemia, infecções ou problemas de coagulação.');
+      if (!hemogramaOk) {
+        tudoOk = false;  
+      }
+    }
+
+    // Verifica o Perfil Lipídico
+    if (resumoPerfilLipidico != null) {
+      bool perfilLipidicoOk = resumoPerfilLipidico.contains('Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.');
+      if (!perfilLipidicoOk) {
+        tudoOk = false; 
+      }
+    }
+
+    // Verifica a Tireoide
+    if (resumoTireoide != null) {
+      bool tireoideOk = resumoTireoide.contains('Tireoide: Todos os valores estão dentro das faixas recomendadas, indicando funcionamento normal da tireoide.');
+      if (!tireoideOk) {
+        tudoOk = false;  
+      }
+    }
+
+    // Verifica a Glicemia
+    if (resumoGlicemia != null) {
+      bool glicemiaOk = resumoGlicemia.contains('Glicemia em Jejum: O valor da glicose está dentro da faixa recomendada, indicando controle adequado da glicemia.');
+      if (!glicemiaOk) {
+        tudoOk = false;  
+      }
+    }
+
+    return tudoOk ? 'Tudo Ok' : 'Requer Atenção';
+  } catch (e) {
+    return 'Erro ao obter os resultados. Tente novamente mais tarde.';
+  }
+}
+
+
+
+Future<void> _carregarResumoCompleto() async {
+  int? usuarioID = UsuarioLogado.usuario?.id;
+  if (usuarioID != null) {
+    String resumoCompleto = await obterResumoCompleto(usuarioID); 
+    setState(() {
+      _resumoCompleto = resumoCompleto; 
+    });
+  }
+}
+
+
+
+Future<void> _carregarResumoGlicemia() async {
+  int? usuarioID = UsuarioLogado.usuario?.id;
+  if (usuarioID != null) {
+    String resumo = await obterResumoGlicemiaSimples(usuarioID); 
+    setState(() {
+      _resumoGlicemia = resumo; 
+    });
+  }
+}
+
+Future<void> _carregarResumoTireoide() async {
+  int? usuarioID = UsuarioLogado.usuario?.id;
+  if (usuarioID != null) {
+    String resumo = await obterResumoTireoideSimples(usuarioID); 
+    setState(() {
+      _resumoTireoide = resumo; 
+    });
+  }
+}
 
 Future<void> _carregarResumoPerfilLipidico() async {
   int? usuarioID = UsuarioLogado.usuario?.id;
   if (usuarioID != null) {
-    String resumo = await obterResumoPerfilLipidico(usuarioID); // Chama a função
+    String resumo = await obterResumoPerfilLipidico(usuarioID); 
     setState(() {
-      _resumoPerfilLipidico = resumo; // Atualiza o estado com o resumo
+      _resumoPerfilLipidico = resumo; 
     });
   }
 }
@@ -234,7 +358,7 @@ Future<void> _carregarResumoPerfilLipidico() async {
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    'Requer Atenção',
+                                    _resumoCompleto,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -347,13 +471,13 @@ Future<void> _carregarResumoPerfilLipidico() async {
                     ),
                   ),
                   Text(
-                    "Função Tireoidiana: TSH e T4 Livre normais, indicando que a tireoide está funcionando adequadamente.",
+                    _resumoTireoide,
                     style: TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
-                    "Glicemia em Jejum: Dentro do esperado, sugerindo controle adequado dos níveis de glicose no sangue.",
+                    _resumoGlicemia,
                     style: TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
