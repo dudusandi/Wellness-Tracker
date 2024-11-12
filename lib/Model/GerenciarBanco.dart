@@ -90,6 +90,24 @@ Future<List<Exame>> obterExamesPorUsuarioId(int usuarioId) async {
     )).toList();
 }
 
+Future<double?> obterValorExame(int usuarioId, String nomeExame) async {
+  final banco = 'banco.db';
+  final db = sqlite3.open(banco);
+
+  final result = db.select(
+    'SELECT valor FROM exames WHERE usuario_id = ? AND nome = ? ORDER BY data_exame DESC LIMIT 1',
+    [usuarioId, nomeExame],
+  );
+
+  db.dispose();
+
+  if (result.isNotEmpty) {
+    return double.tryParse(result.first['valor'].toString());
+  }
+  return null;
+}
+
+
   Future<void> removerExamePorId(int exameId) async {
     final banco = 'banco.db';
     final db = sqlite3.open(banco);

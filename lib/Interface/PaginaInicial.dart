@@ -24,12 +24,14 @@ class _PaginaInicialState extends State<PaginaInicial> {
   void initState() {
     super.initState();
     _carregarDataUltimoExame();
+    _carregarResumoHemograma();
+    
   }
 
   final GerenciarBanco _gerenciarBanco = GerenciarBanco();
   List<Exame> _exames = [];
-
-  
+  String resumo = "";
+  String _resumoHemograma = 'Carregando...'; 
 
 Future<void> _carregarDataUltimoExame() async {
   int? usuarioID = UsuarioLogado.usuario?.id;
@@ -57,6 +59,66 @@ DateTime _converterParaDateTime(String data) {
   int ano = int.parse(partes[2]);
   return DateTime(ano, mes, dia);
 }
+
+Future<String> obterResumoHemograma(int usuarioID) async {
+  try {
+    // Aguarda os valores dos exames, que são futuros
+    double? hemoglobina = await _gerenciarBanco.obterValorExame(usuarioID, 'Hemoglobina');
+    double? leucocitos = await _gerenciarBanco.obterValorExame(usuarioID, 'Leucócitos');
+    double? plaquetas = await _gerenciarBanco.obterValorExame(usuarioID, 'Plaquetas');
+
+    // Se algum valor for nulo, retorna uma mensagem de erro
+    if (hemoglobina == null || leucocitos == null || plaquetas == null) {
+      return 'Dados incompletos para o hemograma.';
+    }
+
+    String resumo = 'Resumo do Hemograma:\n';
+
+    // Interpretação da Hemoglobina
+    if (hemoglobina >= 12 && hemoglobina <= 16) {
+      resumo += 'Hemoglobina está dentro do normal ($hemoglobina g/dL).\n';
+    } else if (hemoglobina < 12) {
+      resumo += 'Hemoglobina abaixo do normal ($hemoglobina g/dL), possível anemia.\n';
+    } else {
+      resumo += 'Hemoglobina acima do normal ($hemoglobina g/dL), possível policitemia.\n';
+    }
+
+    // Interpretação dos Leucócitos
+    if (leucocitos >= 4000 && leucocitos <= 11000) {
+      resumo += 'Leucócitos dentro do normal ($leucocitos células/μL).\n';
+    } else if (leucocitos < 4000) {
+      resumo += 'Leucócitos abaixo do normal ($leucocitos células/μL), possível leucopenia.\n';
+    } else {
+      resumo += 'Leucócitos acima do normal ($leucocitos células/μL), possível infecção ou inflamação.\n';
+    }
+
+    // Interpretação das Plaquetas
+    if (plaquetas >= 150000 && plaquetas <= 450000) {
+      resumo += 'Plaquetas dentro do normal ($plaquetas células/μL).\n';
+    } else if (plaquetas < 150000) {
+      resumo += 'Plaquetas abaixo do normal ($plaquetas células/μL), possível trombocitopenia.\n';
+    } else {
+      resumo += 'Plaquetas acima do normal ($plaquetas células/μL), possível trombocitose.\n';
+    }
+
+    return resumo;
+  } catch (e) {
+    return 'Erro ao obter os dados do hemograma: $e';
+  }
+}
+
+
+  Future<void> _carregarResumoHemograma() async {
+    int? usuarioID = UsuarioLogado.usuario?.id;
+    if (usuarioID != null) {
+      String resumo = await obterResumoHemograma(usuarioID); // Chama a função
+      setState(() {
+        _resumoHemograma = resumo; // Atualiza o estado com o resumo
+      });
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -228,7 +290,7 @@ DateTime _converterParaDateTime(String data) {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Hemograma Completo: Dentro dos valores normais, indicando que não há sinais de anemia, infecções ou problemas de coagulação",
+                    _resumoHemograma,
                     style: TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
