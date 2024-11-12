@@ -1,11 +1,62 @@
+import 'package:WelnessTracker/Interface/Exames.dart';
 import 'package:WelnessTracker/Interface/Login.dart';
+import 'package:WelnessTracker/Model/Exame.dart';
+import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:WelnessTracker/Model/UsuarioLogado.dart';
 import 'package:flutter/material.dart';
 
-class PaginaInicial extends StatelessWidget {
+class PaginaInicial extends StatefulWidget {
+
+  
 
   final Usuario usuario; 
   PaginaInicial({Key? key, required this.usuario}) : super(key: key);
+
+  @override
+  State<PaginaInicial> createState() => _PaginaInicialState();
+}
+
+class _PaginaInicialState extends State<PaginaInicial> {
+
+
+    @override
+  void initState() {
+    super.initState();
+    _carregarDataUltimoExame();
+  }
+
+  final GerenciarBanco _gerenciarBanco = GerenciarBanco();
+  List<Exame> _exames = [];
+
+  
+
+Future<void> _carregarDataUltimoExame() async {
+  int? usuarioID = UsuarioLogado.usuario?.id;
+  if (usuarioID != null) {
+    List<Exame> exames = await _gerenciarBanco.obterExamesPorUsuarioId(usuarioID);
+
+    if (exames.isNotEmpty) {
+      Exame ultimoExame = exames.reduce((a, b) {
+        DateTime aDate = _converterParaDateTime(a.dataExame);
+        DateTime bDate = _converterParaDateTime(b.dataExame);
+        return aDate.isAfter(bDate) ? a : b;
+      });
+
+      setState(() {
+        _exames = [ultimoExame]; 
+      });
+    }
+  }
+}
+
+DateTime _converterParaDateTime(String data) {
+  List<String> partes = data.split('/');
+  int dia = int.parse(partes[0]);
+  int mes = int.parse(partes[1]);
+  int ano = int.parse(partes[2]);
+  return DateTime(ano, mes, dia);
+}
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +71,7 @@ class PaginaInicial extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: Text(
-                  'Bem Vindo, ${usuario.nome}',
+                  'Bem Vindo, ${widget.usuario.nome}',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 32,
@@ -125,7 +176,7 @@ class PaginaInicial extends StatelessWidget {
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
-                                    '25/04/2020',
+                                     _exames.isNotEmpty? _exames.first.dataExame: 'Não Disponivel',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
