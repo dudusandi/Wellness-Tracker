@@ -25,6 +25,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
     super.initState();
     _carregarDataUltimoExame();
     _carregarResumoHemograma();
+    _carregarResumoPerfilLipidico();
     
   }
 
@@ -32,6 +33,7 @@ class _PaginaInicialState extends State<PaginaInicial> {
   List<Exame> _exames = [];
   String resumo = "";
   String _resumoHemograma = 'Carregando...'; 
+  String _resumoPerfilLipidico = 'Carregando...'; 
 
 Future<void> _carregarDataUltimoExame() async {
   int? usuarioID = UsuarioLogado.usuario?.id;
@@ -104,6 +106,63 @@ Future<String> obterResumoHemograma(int usuarioID) async {
     }
   }
 
+Future<String> obterResumoPerfilLipidico(int usuarioID) async {
+  try {
+    // Obtém os valores dos exames
+    double? colesterolTotal = await _gerenciarBanco.obterValorExame(usuarioID, 'Colesterol Total');
+    double? colesterolHDL = await _gerenciarBanco.obterValorExame(usuarioID, 'Colesterol HDL');
+    double? colesterolLDL = await _gerenciarBanco.obterValorExame(usuarioID, 'Colesterol LDL');
+    double? triglicerideos = await _gerenciarBanco.obterValorExame(usuarioID, 'Triglicerídeos');
+
+    // Verifica se algum valor é nulo
+    if (colesterolTotal == null || colesterolHDL == null || colesterolLDL == null || triglicerideos == null) {
+      return 'Dados incompletos para o perfil lipídico.';
+    }
+
+    // Checa se todos os exames estão dentro das faixas recomendadas
+    bool perfilDentroDoNormal = true;
+
+    // Colesterol Total
+    if (colesterolTotal >= 200) {
+      perfilDentroDoNormal = false;
+    }
+
+    // Colesterol HDL
+    if (colesterolHDL <= 40) {
+      perfilDentroDoNormal = false;
+    }
+
+    // Colesterol LDL
+    if (colesterolLDL >= 160) {
+      perfilDentroDoNormal = false;
+    }
+
+    // Triglicerídeos
+    if (triglicerideos >= 150) {
+      perfilDentroDoNormal = false;
+    }
+
+    // Resumo baseado na avaliação
+    if (perfilDentroDoNormal) {
+      return 'Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.';
+    } else {
+      return 'Perfil Lipídico: Alguns valores estão fora das faixas recomendadas, podendo indicar risco aumentado para doenças cardiovasculares.';
+    }
+  } catch (e) {
+    return 'Erro ao obter os dados do perfil lipídico: $e';
+  }
+}
+
+
+Future<void> _carregarResumoPerfilLipidico() async {
+  int? usuarioID = UsuarioLogado.usuario?.id;
+  if (usuarioID != null) {
+    String resumo = await obterResumoPerfilLipidico(usuarioID); // Chama a função
+    setState(() {
+      _resumoPerfilLipidico = resumo; // Atualiza o estado com o resumo
+    });
+  }
+}
 
 
   @override
@@ -282,7 +341,7 @@ Future<String> obterResumoHemograma(int usuarioID) async {
                     ),
                   ),
                   Text(
-                    "Perfil Lipídico: Todos os valores estão dentro das faixas recomendadas, apontando baixo risco para doenças cardiovasculares.",
+                    _resumoPerfilLipidico,
                     style: TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
