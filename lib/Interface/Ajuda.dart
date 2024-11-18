@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Academia extends StatefulWidget {
+class Ajuda extends StatefulWidget {
   @override
-  _AcademiaState createState() => _AcademiaState();
+  _AjudaState createState() => _AjudaState();
 }
 
-class _AcademiaState extends State<Academia> {
+class _AjudaState extends State<Ajuda> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,7 +13,7 @@ class _AcademiaState extends State<Academia> {
         padding: EdgeInsets.all(60),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
-            'Academia',
+            'Ajuda',
             style: TextStyle(
                 color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
           ),

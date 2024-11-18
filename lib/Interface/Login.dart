@@ -18,6 +18,8 @@ void main() async{
     WindowOptions windowOptions = WindowOptions(
     size: Size(1280, 800),
     minimumSize: Size(1280, 800),
+    maximumSize: Size(1280, 800),
+    fullScreen: false,
     center: true,
     title: "WelnessTracker",
     windowButtonVisibility: true,

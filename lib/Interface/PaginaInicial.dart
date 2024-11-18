@@ -186,7 +186,7 @@ Future<void> _carregar() async {
                         SizedBox(height: 20),
                         Center(
                           child: Text(
-                            'Data do Ultimo Exame',
+                            'Data do Último Exame',
                             style: TextStyle(
                               color: Colors.white54,
                               fontSize: 12,

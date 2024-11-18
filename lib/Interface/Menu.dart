@@ -1,10 +1,10 @@
+import 'package:WelnessTracker/Interface/Ajuda.dart';
 import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Interface/PaginaInicial.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
-import '../Interface/academia.dart';
 import 'ficha_medica.dart';
 import 'NovoExame.dart';
 
@@ -43,7 +43,7 @@ class _InicioState extends State<Inicio> {
       FichaMedica(),
       NovoExame(),
       Calendario(),
-      Academia(),
+      Ajuda(),
     ];
   }
 
@@ -79,7 +79,7 @@ class _InicioState extends State<Inicio> {
                   SizedBox(height: 30),
                   _buildMenuItem(Icons.calendar_today, 'Calendário', 4),
                   SizedBox(height: 30),
-                  _buildMenuItem(Icons.fitness_center, 'Academia', 5),
+                  _buildMenuItem(Icons.help, 'Ajuda', 5),
                 ],
               ),
             ),
