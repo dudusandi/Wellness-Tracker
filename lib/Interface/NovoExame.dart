@@ -49,12 +49,12 @@ class NovoExame extends StatefulWidget {
 }
 
 class _NovoExameState extends State<NovoExame> {
-  late Funcoes funcoes;
+  late Controller funcoes;
 
   @override
   void initState() {
     super.initState();
-    funcoes = Funcoes(GerenciarBanco());
+    funcoes = Controller(GerenciarBanco());
   }
 
   var maskFormatter = MaskTextInputFormatter(
