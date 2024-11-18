@@ -15,6 +15,14 @@ class Controller {
   }
 
 
+  Future<List<Exame>> obterExames(int usuarioID) async {
+    return await _gerenciarBanco.obterExamesPorUsuarioId(usuarioID);
+  }
+
+    Future<void> removerExame(int exameId) async {
+    await _gerenciarBanco.removerExamePorId(exameId);
+  }
+
   Future<void> adicionarUsuario(
       String nome, String dataNascimento, String email, String senha) async {
 
@@ -22,8 +30,6 @@ class Controller {
         nome: nome, dataNascimento: dataNascimento, email: email, senha: senha);
     await _gerenciarBanco.criarUsuario(novoUsuario);
   }
-
-
 
   DateTime converterParaDateTime(String data) {
     List<String> partes = data.split('/');
@@ -200,6 +206,8 @@ Future<String> obterResumoCompleto(int usuarioID) async {
     return 'Erro ao obter os resultados. Tente novamente mais tarde.';
   }
 }
+
+
 
 
 }

@@ -1,3 +1,4 @@
+import 'package:WelnessTracker/Controlador/Controller.dart';
 import 'package:WelnessTracker/Model/Exame.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/UsuarioLogado.dart';
@@ -10,18 +11,20 @@ class Exames extends StatefulWidget {
 
 class _ExamesState extends State<Exames> {
   final GerenciarBanco _gerenciarBanco = GerenciarBanco();
+  late final Controller _controller;
   List<Exame> _exames = [];
 
   @override
   void initState() {
     super.initState();
+    _controller = Controller(_gerenciarBanco);
     _carregarExames();
   }
 
   Future<void> _carregarExames() async {
     int? usuarioID = UsuarioLogado.usuario?.id;
     if (usuarioID != null) {
-      List<Exame> exames = await _gerenciarBanco.obterExamesPorUsuarioId(usuarioID);
+      List<Exame> exames = await _controller.obterExames(usuarioID);
       setState(() {
         _exames = exames;
       });
@@ -29,7 +32,7 @@ class _ExamesState extends State<Exames> {
   }
 
   Future<void> _removerExame(int exameId) async {
-      await _gerenciarBanco.removerExamePorId(exameId);
+      await _controller.removerExame(exameId);
       _carregarExames(); 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Exame removido com sucesso")),

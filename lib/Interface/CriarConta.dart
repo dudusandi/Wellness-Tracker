@@ -19,10 +19,8 @@ class LoginCadastro extends StatefulWidget {
 
 class _LoginCadastroState extends State<LoginCadastro> {
   final Controller funcoes = Controller(GerenciarBanco());
-
   final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _dataNascimentoController =
-      TextEditingController();
+  final TextEditingController _dataNascimentoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
 
