@@ -15,6 +15,11 @@ class Controller {
   }
 
 
+  Future<void> salvarFichaMedica(int usuarioID, double frequenciaExercicio) async {
+      await _gerenciarBanco.salvarFichaMedica(usuarioID, frequenciaExercicio);
+
+  }
+
   Future<List<Exame>> obterExames(int usuarioID) async {
     return await _gerenciarBanco.obterExamesPorUsuarioId(usuarioID);
   }
@@ -30,6 +35,8 @@ class Controller {
         nome: nome, dataNascimento: dataNascimento, email: email, senha: senha);
     await _gerenciarBanco.criarUsuario(novoUsuario);
   }
+
+
 
   DateTime converterParaDateTime(String data) {
     List<String> partes = data.split('/');

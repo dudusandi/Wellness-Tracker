@@ -14,9 +14,22 @@ Future<void> criarUsuario(Usuario usuario) async {
       'INSERT INTO usuarios (nome, data_nascimento, email, senha) VALUES (?, ?, ?, ?)',
       [usuario.nome, usuario.dataNascimento, usuario.email, usuario.senha]
     );
-  print('Usuário ${usuario.nome} adicionado com sucesso!'); 
   db.dispose();
 }
+
+Future<void> salvarFichaMedica(int id, double frequenciaExercicio) async {
+  final banco = 'banco.db';
+  final db = sqlite3.open(banco);
+
+  db.execute(
+    'UPDATE usuarios SET frequencia_exercicio = ? WHERE id = ?',
+    [
+    frequenciaExercicio, id
+    ]
+  );
+  db.dispose();
+}
+
 
 Future<void> criarExame(Exame exame,int usuarioID) async {
   final banco = 'banco.db';
@@ -64,6 +77,7 @@ Future<Usuario?> obterUsuarioPorEmail(String email) async {
       dataNascimento: usuarioData['data_nascimento'],
       email: usuarioData['email'],
       senha: '', 
+      frequenciaExercicio: double.tryParse(usuarioData['frequencia_exercicio'].toString()) ?? 0,
     );
   }
 

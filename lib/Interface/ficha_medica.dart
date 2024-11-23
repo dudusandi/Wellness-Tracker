@@ -1,59 +1,62 @@
+import 'package:WelnessTracker/Controlador/Controller.dart';
+import 'package:WelnessTracker/Interface/Login.dart';
+import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:WelnessTracker/Model/UsuarioLogado.dart';
 import 'package:flutter/material.dart';
 
 class FichaMedica extends StatefulWidget {
-final Usuario usuario;
+  final Usuario usuario;
 
   FichaMedica({required this.usuario});
-
 
   @override
   _FichaMedicaState createState() => _FichaMedicaState();
 }
 
-
 class _FichaMedicaState extends State<FichaMedica> {
- 
+  
+  final int? usuarioId = UsuarioLogado.usuario?.id;
+  late Controller funcoes;
   late TextEditingController nomeController;
   late TextEditingController idadeController;
+  bool isSwitched = true;
+ double FrequenciaExercicio = 0;
 
-int calcularIdade(String dataNascimento) {
-  try {
-    List<String> partes = dataNascimento.split('/');
-    if (partes.length != 3) {
-      throw FormatException('Formato de data inválido');
+
+  int calcularIdade(String dataNascimento) {
+    try {
+      List<String> partes = dataNascimento.split('/');
+      if (partes.length != 3) {
+        throw FormatException('Formato de data inválido');
+      }
+      String dataFormatada = "${partes[2]}-${partes[1]}-${partes[0]}";
+      DateTime nascimento = DateTime.parse(dataFormatada);
+      DateTime hoje = DateTime.now();
+      int idade = hoje.year - nascimento.year;
+      if (hoje.month < nascimento.month ||
+          (hoje.month == nascimento.month && hoje.day < nascimento.day)) {
+        idade--;
+      }
+      return idade;
+    } catch (e) {
+      print("Erro ao calcular idade: $e");
+      return 0;
     }
-    String dataFormatada = "${partes[2]}-${partes[1]}-${partes[0]}";
-    DateTime nascimento = DateTime.parse(dataFormatada);
-    DateTime hoje = DateTime.now();
-    int idade = hoje.year - nascimento.year;
-    if (hoje.month < nascimento.month ||
-        (hoje.month == nascimento.month && hoje.day < nascimento.day)) {
-      idade--;
-    }
-    return idade;
-  } catch (e) {
-    print("Erro ao calcular idade: $e");
-    return 0; 
   }
-}
 
   @override
   void initState() {
     super.initState();
+    funcoes = Controller(GerenciarBanco());
     nomeController = TextEditingController(text: widget.usuario.nome);
-    
     int idade = calcularIdade(widget.usuario.dataNascimento);
-
     idadeController = TextEditingController(text: idade.toString());
+    FrequenciaExercicio = widget.usuario.frequenciaExercicio!;
   }
-
 
   @override
   Widget build(BuildContext context) {
-    bool isSwitched = true;
-    double FrequenciaExercicio = 0; 
-
     return Container(
       color: Color(0xFF472B2B),
       padding: EdgeInsets.all(60),
@@ -108,19 +111,16 @@ int calcularIdade(String dataNascimento) {
                     value: FrequenciaExercicio,
                     min: 0,
                     max: 7,
-                    divisions: 7, 
-                    label: FrequenciaExercicio
-                        .round()
-                        .toString(), 
+                    divisions: 7,
+                    label: FrequenciaExercicio.round().toString(),
                     onChanged: (double value) {
                       setState(() {
                         FrequenciaExercicio = value;
                       });
                     },
-                    activeColor: Colors.blue, 
-                    inactiveColor: Colors.grey, 
+                    activeColor: Colors.blue,
+                    inactiveColor: Colors.grey,
                   ),
-    
                   Text(
                     'Indique a quantidade de vezes por semana que se exercita',
                     style: TextStyle(color: Colors.white, fontSize: 13),
@@ -155,7 +155,7 @@ int calcularIdade(String dataNascimento) {
                 value: isSwitched,
                 onChanged: (value) {
                   setState(() {
-                    isSwitched = value; 
+                    isSwitched = value;
                   });
                 },
                 activeColor: const Color.fromARGB(255, 255, 255, 255),
@@ -177,31 +177,26 @@ int calcularIdade(String dataNascimento) {
                   ),
                   child: TextField(
                     decoration: InputDecoration(
-                      labelText: "Nome da Medicação",
+                      labelText: "Nome das Medicações",
                       border: InputBorder.none,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 20),
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      labelText: "Propósito",
-                      border: InputBorder.none,
-                    ),
-                  ),
-                ),
-              ),
+              ),             
             ],
-          )
+          ),
+          SizedBox(height: 30,),
+          ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    widget.usuario.frequenciaExercicio = FrequenciaExercicio;
+                  });
+                  funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio);
+                },
+                child: Text("Salvar"),
+              )
         ],
+        
       ),
     );
   }

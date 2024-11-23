@@ -12,7 +12,8 @@ db.execute('''
       nome TEXT NOT NULL,
       data_nascimento TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
-      senha TEXT NOT NULL
+      senha TEXT NOT NULL,
+      frequencia_exercicio TEXT
     );
 ''');
 

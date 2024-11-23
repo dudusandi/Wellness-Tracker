@@ -71,6 +71,7 @@ class _LoginState extends State<Login> {
         dataNascimento: usuarioDados.dataNascimento,
         email: usuarioDados.email,
         senha: senha, 
+        frequenciaExercicio: usuarioDados.frequenciaExercicio,
       );
       UsuarioLogado.setUsuario(usuario); 
       Navigator.push(
