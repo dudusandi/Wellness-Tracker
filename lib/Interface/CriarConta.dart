@@ -2,6 +2,7 @@ import 'package:WelnessTracker/Controlador/Controller.dart';
 import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -23,6 +24,10 @@ class _LoginCadastroState extends State<LoginCadastro> {
   final TextEditingController _dataNascimentoController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
+
+    var maskFormatter = MaskTextInputFormatter(
+    mask: "##/##/####",
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +73,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                     color: Colors.white),
                 child: TextField(
                   controller: _dataNascimentoController,
+                  inputFormatters: [maskFormatter],
                   style: TextStyle(),
                   decoration: InputDecoration(
                       labelText: "Data de Nascimento",

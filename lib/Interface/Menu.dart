@@ -38,9 +38,9 @@ class _InicioState extends State<Inicio> {
   void initState() {
     super.initState();
     _pages = [
-      PaginaInicial(usuario: widget.usuario,),
+      PaginaInicial(usuario: widget.usuario),
       Exames(),
-      FichaMedica(),
+      FichaMedica(usuario: widget.usuario),
       NovoExame(),
       Calendario(),
       Ajuda(),
@@ -76,8 +76,6 @@ class _InicioState extends State<Inicio> {
                   _buildMenuItem(Icons.assignment, 'Ver Exames', 1),
                   SizedBox(height: 30),
                   _buildMenuItem(Icons.favorite, 'Ficha Médica', 2),
-                  SizedBox(height: 30),
-                  _buildMenuItem(Icons.calendar_today, 'Calendário', 4),
                   SizedBox(height: 30),
                   _buildMenuItem(Icons.help, 'Ajuda', 5),
                 ],

@@ -1,15 +1,58 @@
+import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 
 class FichaMedica extends StatefulWidget {
+final Usuario usuario;
+
+  FichaMedica({required this.usuario});
+
+
   @override
   _FichaMedicaState createState() => _FichaMedicaState();
 }
 
+
 class _FichaMedicaState extends State<FichaMedica> {
+ 
+  late TextEditingController nomeController;
+  late TextEditingController idadeController;
+
+int calcularIdade(String dataNascimento) {
+  try {
+    List<String> partes = dataNascimento.split('/');
+    if (partes.length != 3) {
+      throw FormatException('Formato de data inválido');
+    }
+    String dataFormatada = "${partes[2]}-${partes[1]}-${partes[0]}";
+    DateTime nascimento = DateTime.parse(dataFormatada);
+    DateTime hoje = DateTime.now();
+    int idade = hoje.year - nascimento.year;
+    if (hoje.month < nascimento.month ||
+        (hoje.month == nascimento.month && hoje.day < nascimento.day)) {
+      idade--;
+    }
+    return idade;
+  } catch (e) {
+    print("Erro ao calcular idade: $e");
+    return 0; 
+  }
+}
+
+  @override
+  void initState() {
+    super.initState();
+    nomeController = TextEditingController(text: widget.usuario.nome);
+    
+    int idade = calcularIdade(widget.usuario.dataNascimento);
+
+    idadeController = TextEditingController(text: idade.toString());
+  }
+
+
   @override
   Widget build(BuildContext context) {
     bool isSwitched = true;
-    double exerciseFrequency = 0; 
+    double FrequenciaExercicio = 0; 
 
     return Container(
       color: Color(0xFF472B2B),
@@ -29,6 +72,7 @@ class _FichaMedicaState extends State<FichaMedica> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Colors.white),
             child: TextField(
+              controller: nomeController,
               style: TextStyle(),
               decoration:
                   InputDecoration(labelText: "Nome", border: InputBorder.none),
@@ -44,6 +88,7 @@ class _FichaMedicaState extends State<FichaMedica> {
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.white),
                   child: TextField(
+                    controller: idadeController,
                     style: TextStyle(),
                     decoration: InputDecoration(
                         labelText: "Idade", border: InputBorder.none),
@@ -60,16 +105,16 @@ class _FichaMedicaState extends State<FichaMedica> {
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   Slider(
-                    value: exerciseFrequency,
+                    value: FrequenciaExercicio,
                     min: 0,
                     max: 7,
                     divisions: 7, 
-                    label: exerciseFrequency
+                    label: FrequenciaExercicio
                         .round()
                         .toString(), 
                     onChanged: (double value) {
                       setState(() {
-                        exerciseFrequency = value;
+                        FrequenciaExercicio = value;
                       });
                     },
                     activeColor: Colors.blue, 
