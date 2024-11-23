@@ -14,17 +14,14 @@ class FichaMedica extends StatefulWidget {
 }
 
 class _FichaMedicaState extends State<FichaMedica> {
-
-  
   final int? usuarioId = UsuarioLogado.usuario?.id;
   late Controller funcoes;
   late TextEditingController nomeController;
   late TextEditingController idadeController;
- TextEditingController comorbidades = TextEditingController();
- TextEditingController medicacoes = TextEditingController();
- bool isSwitched = true;
- double FrequenciaExercicio = 0;
-
+  TextEditingController comorbidades = TextEditingController();
+  TextEditingController medicacoes = TextEditingController();
+  bool isSwitched = true;
+  double FrequenciaExercicio = 0;
 
   int calcularIdade(String dataNascimento) {
     try {
@@ -189,25 +186,30 @@ class _FichaMedicaState extends State<FichaMedica> {
                     ),
                   ),
                 ),
-              ),             
+              ),
             ],
           ),
-          SizedBox(height: 30,),
+          SizedBox(
+            height: 30,
+          ),
           ElevatedButton(
-                onPressed: () {
-                    int isMedicacaoContinua = isSwitched ? 1 : 0;
-                  setState(() {
-                    widget.usuario.medicacoes = medicacoes.text;
-                    widget.usuario.comorbidades = comorbidades.text;
-                    widget.usuario.frequenciaExercicio = FrequenciaExercicio;
-                    widget.usuario.isSwitched = isSwitched;
-                  });
-                  funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio, comorbidades.text, medicacoes.text, isMedicacaoContinua);
-                },
-                child: Text("Salvar"),
-              )
+            onPressed: () {
+              int isMedicacaoContinua = isSwitched ? 1 : 0;
+              setState(() {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Ficha Médica Atualizada!")),
+                );
+                widget.usuario.medicacoes = medicacoes.text;
+                widget.usuario.comorbidades = comorbidades.text;
+                widget.usuario.frequenciaExercicio = FrequenciaExercicio;
+                widget.usuario.isSwitched = isSwitched;
+              });
+              funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio,
+                  comorbidades.text, medicacoes.text, isMedicacaoContinua);
+            },
+            child: Text("Salvar"),
+          )
         ],
-        
       ),
     );
   }
