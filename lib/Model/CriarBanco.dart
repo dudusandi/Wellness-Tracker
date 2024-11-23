@@ -13,7 +13,10 @@ db.execute('''
       data_nascimento TEXT NOT NULL,
       email TEXT NOT NULL UNIQUE,
       senha TEXT NOT NULL,
-      frequencia_exercicio TEXT
+      frequencia_exercicio TEXT,
+      comorbidades TEXT,
+      medicacoes TEXT,
+      is_medicacao_continua TEXT
     );
 ''');
 

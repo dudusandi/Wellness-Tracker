@@ -7,6 +7,7 @@ class Usuario {
   double? frequenciaExercicio;
   String? comorbidades;
   String? medicacoes;
+  bool? isSwitched;
 
   Usuario({
     
@@ -18,6 +19,7 @@ class Usuario {
   this.frequenciaExercicio,
   this.comorbidades,
   this.medicacoes,
+  this.isSwitched
   
 
   

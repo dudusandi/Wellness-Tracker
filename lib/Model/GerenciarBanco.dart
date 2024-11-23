@@ -17,16 +17,22 @@ Future<void> criarUsuario(Usuario usuario) async {
   db.dispose();
 }
 
-Future<void> salvarFichaMedica(int id, double frequenciaExercicio) async {
+Future<void> salvarFichaMedica(int id, double frequenciaExercicio, String comorbidades, String medicacoes, int isSwitched) async {
   final banco = 'banco.db';
   final db = sqlite3.open(banco);
 
   db.execute(
-    'UPDATE usuarios SET frequencia_exercicio = ? WHERE id = ?',
+    'UPDATE usuarios SET frequencia_exercicio = ?, comorbidades = ?, medicacoes = ?,  is_medicacao_continua= ? WHERE id = ?',
     [
-    frequenciaExercicio, id
+      frequenciaExercicio,
+      comorbidades,
+      medicacoes,
+      isSwitched,
+      id,
+
     ]
   );
+
   db.dispose();
 }
 
@@ -78,6 +84,9 @@ Future<Usuario?> obterUsuarioPorEmail(String email) async {
       email: usuarioData['email'],
       senha: '', 
       frequenciaExercicio: double.tryParse(usuarioData['frequencia_exercicio'].toString()) ?? 0,
+      comorbidades: usuarioData['comorbidades'],
+      medicacoes: usuarioData['medicacoes'],
+      isSwitched: usuarioData['isMedicacaoContinua']
     );
   }
 

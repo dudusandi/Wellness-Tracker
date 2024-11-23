@@ -15,8 +15,8 @@ class Controller {
   }
 
 
-  Future<void> salvarFichaMedica(int usuarioID, double frequenciaExercicio) async {
-      await _gerenciarBanco.salvarFichaMedica(usuarioID, frequenciaExercicio);
+  Future<void> salvarFichaMedica(int usuarioID, double frequenciaExercicio, String comorbidades, String medicacoes, int isSwitched) async {
+      await _gerenciarBanco.salvarFichaMedica(usuarioID, frequenciaExercicio,comorbidades, medicacoes, isSwitched);
 
   }
 

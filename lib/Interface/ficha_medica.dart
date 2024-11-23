@@ -1,5 +1,4 @@
 import 'package:WelnessTracker/Controlador/Controller.dart';
-import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:WelnessTracker/Model/UsuarioLogado.dart';
@@ -15,12 +14,15 @@ class FichaMedica extends StatefulWidget {
 }
 
 class _FichaMedicaState extends State<FichaMedica> {
+
   
   final int? usuarioId = UsuarioLogado.usuario?.id;
   late Controller funcoes;
   late TextEditingController nomeController;
   late TextEditingController idadeController;
-  bool isSwitched = true;
+ TextEditingController comorbidades = TextEditingController();
+ TextEditingController medicacoes = TextEditingController();
+ bool isSwitched = true;
  double FrequenciaExercicio = 0;
 
 
@@ -53,6 +55,9 @@ class _FichaMedicaState extends State<FichaMedica> {
     int idade = calcularIdade(widget.usuario.dataNascimento);
     idadeController = TextEditingController(text: idade.toString());
     FrequenciaExercicio = widget.usuario.frequenciaExercicio!;
+    comorbidades = TextEditingController(text: widget.usuario.comorbidades);
+    medicacoes = TextEditingController(text: widget.usuario.medicacoes);
+    isSwitched = widget.usuario.isSwitched ?? false;
   }
 
   @override
@@ -136,6 +141,7 @@ class _FichaMedicaState extends State<FichaMedica> {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Colors.white),
             child: TextField(
+              controller: comorbidades,
               style: TextStyle(),
               decoration: InputDecoration(
                   labelText: "Comorbidades", border: InputBorder.none),
@@ -176,6 +182,7 @@ class _FichaMedicaState extends State<FichaMedica> {
                     color: Colors.white,
                   ),
                   child: TextField(
+                    controller: medicacoes,
                     decoration: InputDecoration(
                       labelText: "Nome das Medicações",
                       border: InputBorder.none,
@@ -188,10 +195,14 @@ class _FichaMedicaState extends State<FichaMedica> {
           SizedBox(height: 30,),
           ElevatedButton(
                 onPressed: () {
+                    int isMedicacaoContinua = isSwitched ? 1 : 0;
                   setState(() {
+                    widget.usuario.medicacoes = medicacoes.text;
+                    widget.usuario.comorbidades = comorbidades.text;
                     widget.usuario.frequenciaExercicio = FrequenciaExercicio;
+                    widget.usuario.isSwitched = isSwitched;
                   });
-                  funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio);
+                  funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio, comorbidades.text, medicacoes.text, isMedicacaoContinua);
                 },
                 child: Text("Salvar"),
               )
