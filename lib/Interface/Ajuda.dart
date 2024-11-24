@@ -65,7 +65,7 @@ class _AjudaState extends State<Ajuda> {
                  SizedBox(height: 20),                             
                  Text(
                   style: TextStyle(color: Colors.white, fontSize: 12,fontFamily: 'JuliusSansOne',fontWeight: FontWeight.bold),
-                  "Projeto Temático 2: Eduardo Sandi, Alice Novello, Maite Bueno"
+                  "Projeto Temático 2: Alice Novello, Eduardo Sandi, Maitê Bueno"
                   ),                  
               ],
             ),
