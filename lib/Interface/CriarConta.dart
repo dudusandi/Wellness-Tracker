@@ -118,6 +118,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
+                      style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                         onPressed: () async {
                           try {
                             await funcoes.adicionarUsuario(
@@ -145,20 +146,21 @@ class _LoginCadastroState extends State<LoginCadastro> {
                             );
                           }
                         },
-                        child: Text("Criar Conta")),
+                        child: Text("Criar Conta", style: TextStyle(color: Colors.white),)),
                   ),
                   SizedBox(
                     width: 20,
                   ),
                   Expanded(
                     child: ElevatedButton(
+                      style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Login()),
                           );
                         },
-                        child: Text("Voltar ao Inicio")),
+                        child: Text("Voltar ao Inicio",style: TextStyle(color: Colors.white),)),
                   ),
                 ],
               ),

@@ -159,6 +159,7 @@ class _NovoExameState extends State<NovoExame> {
                 )),
             SizedBox(height: 40),
             ElevatedButton(
+              style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),fixedSize: Size(200, 50),),
               onPressed: () => {
                 if (_exameSelecionado != null && usuarioId != null)
                   {
@@ -178,7 +179,7 @@ class _NovoExameState extends State<NovoExame> {
                   SnackBar(content: Text("Exame Cadastrado com Sucesso")),
                 )
               },
-              child: Text('Adicionar Exame'),
+              child: Text('Adicionar Exame', style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

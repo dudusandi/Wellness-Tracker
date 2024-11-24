@@ -193,6 +193,7 @@ class _FichaMedicaState extends State<FichaMedica> {
             height: 30,
           ),
           ElevatedButton(
+            style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),fixedSize: Size(150, 40)),
             onPressed: () {
               int isMedicacaoContinua = isSwitched ? 1 : 0;
               setState(() {
@@ -207,7 +208,7 @@ class _FichaMedicaState extends State<FichaMedica> {
               funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio,
                   comorbidades.text, medicacoes.text, isMedicacaoContinua);
             },
-            child: Text("Salvar"),
+            child: Text("Salvar", style: TextStyle(color: Colors.white),),
           )
         ],
       ),

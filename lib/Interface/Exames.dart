@@ -32,12 +32,11 @@ class _ExamesState extends State<Exames> {
   }
 
   Future<void> _removerExame(int exameId) async {
-      await _controller.removerExame(exameId);
-      _carregarExames(); 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Exame removido com sucesso")),
-      );
-    
+    await _controller.removerExame(exameId);
+    _carregarExames();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Exame removido com sucesso")),
+    );
   }
 
   @override
@@ -58,31 +57,37 @@ class _ExamesState extends State<Exames> {
             child: Container(
               padding: EdgeInsets.all(40),
               decoration: BoxDecoration(
-                color: Color(0xFF351A1A), 
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child: ListView.builder(
-                itemCount: _exames.length,
-                itemBuilder: (context, index) {
-                  final exame = _exames[index];
-                  return ListTile(
-                    title: Text(
-                      exame.nome,
-                      style: TextStyle(color: Colors.white),
+                  color: Color(0xFF351A1A),
+                  borderRadius: BorderRadius.circular(20)),
+              child: _exames.isEmpty
+                  ? Center(
+                      child: Text(
+                        'Nenhum exame encontrado.',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: _exames.length,
+                      itemBuilder: (context, index) {
+                        final exame = _exames[index];
+                        return ListTile(
+                          title: Text(
+                            exame.nome,
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          subtitle: Text(
+                            'Data: ${exame.dataExame} - Valor: ${exame.valor}',
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                          trailing: IconButton(
+                            icon: Icon(Icons.delete, color: Colors.red),
+                            onPressed: () async =>
+                                await _removerExame(exame.id!),
+                          ),
+                        );
+                      },
                     ),
-                    subtitle: Text(
-                      'Data: ${exame.dataExame} - Valor: ${exame.valor}',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.red),
-                      onPressed:  () async =>
-                         await _removerExame(exame.id!),
-                      
-                    ),
-                  );
-                },
-              ),
             ),
           ),
         ],
