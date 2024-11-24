@@ -149,10 +149,11 @@ class _LoginState extends State<Login> {
               height: 20,
             ),
             ElevatedButton(
+              style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 onPressed: () {
                   _realizarLogin();
                 },
-                child: Text("Entrar")),
+                child: Text("Entrar", style: TextStyle(color: Colors.white),), ),
             SizedBox(
               height: 40,
             ),

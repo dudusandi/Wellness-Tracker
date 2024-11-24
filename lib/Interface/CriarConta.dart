@@ -21,11 +21,12 @@ class LoginCadastro extends StatefulWidget {
 class _LoginCadastroState extends State<LoginCadastro> {
   final Controller funcoes = Controller(GerenciarBanco());
   final TextEditingController _nomeController = TextEditingController();
-  final TextEditingController _dataNascimentoController = TextEditingController();
+  final TextEditingController _dataNascimentoController =
+      TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
 
-    var maskFormatter = MaskTextInputFormatter(
+  var maskFormatter = MaskTextInputFormatter(
     mask: "##/##/####",
   );
 
@@ -118,20 +119,31 @@ class _LoginCadastroState extends State<LoginCadastro> {
                   Expanded(
                     child: ElevatedButton(
                         onPressed: () async {
-                          await funcoes.adicionarUsuario(
-                            _nomeController.text,
-                            _dataNascimentoController.text,
-                            _emailController.text,
-                            _senhaController.text,
-                          );
-                          _nomeController.clear();
-                          _dataNascimentoController.clear();
-                          _emailController.clear();
-                          _senhaController.clear();
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                                content: Text("Conta criada com Sucesso!")),
-                          );
+                          try {
+                            await funcoes.adicionarUsuario(
+                              _nomeController.text,
+                              _dataNascimentoController.text,
+                              _emailController.text,
+                              _senhaController.text,
+                            );
+                            _nomeController.clear();
+                            _dataNascimentoController.clear();
+                            _emailController.clear();
+                            _senhaController.clear();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text("Conta criada com Sucesso!")),
+                            );
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Login()),
+                            );
+                          } catch (e) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                  content: Text("Erro ao criar conta:  Usuário já está cadastrado no Sistema!")),
+                            );
+                          }
                         },
                         child: Text("Criar Conta")),
                   ),

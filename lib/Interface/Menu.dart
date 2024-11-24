@@ -3,7 +3,6 @@ import 'package:WelnessTracker/Interface/Login.dart';
 import 'package:WelnessTracker/Interface/PaginaInicial.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
-import '../Interface/calendario.dart';
 import '../Interface/exames.dart';
 import 'ficha_medica.dart';
 import 'NovoExame.dart';
@@ -42,7 +41,6 @@ class _InicioState extends State<Inicio> {
       Exames(),
       FichaMedica(usuario: widget.usuario),
       NovoExame(),
-      Calendario(),
       Ajuda(),
     ];
   }
@@ -77,7 +75,7 @@ class _InicioState extends State<Inicio> {
                   SizedBox(height: 30),
                   _buildMenuItem(Icons.favorite, 'Ficha Médica', 2),
                   SizedBox(height: 30),
-                  _buildMenuItem(Icons.help, 'Ajuda', 5),
+                  _buildMenuItem(Icons.help, 'Ajuda', 4),
                 ],
               ),
             ),
@@ -91,11 +89,13 @@ class _InicioState extends State<Inicio> {
   }
 
   Widget _buildMenuItem(IconData icon, String title, int index) {
+    final bool isSelected = _selectedIndex == index;
+
     return ListTile(
-      leading: Icon(icon, color: Colors.white),
+      leading: Icon(icon, color: isSelected ? Color.fromARGB(255, 39, 32, 32) : Colors.white,),
       title: Text(title,
           style: TextStyle(
-              color: Colors.white, fontFamily: 'JuliusSansOne', fontSize: 20)),
+              color: isSelected ? Color.fromARGB(255, 39, 32, 32) : Colors.white, fontFamily: 'JuliusSansOne', fontSize: 20)),
       onTap: () {
         setState(() {
           _selectedIndex = index;
