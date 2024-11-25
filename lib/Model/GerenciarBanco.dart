@@ -8,19 +8,19 @@ import 'dart:async';
 
 class GerenciarBanco {
 
-  Future<String> _obterCaminhoBanco() async {
+  Future<String> obterCaminhoBanco() async {
     late String path;
 
     if (Platform.isIOS || Platform.isAndroid) {
       final directory = await getApplicationDocumentsDirectory();
-      path = '${directory.path}/banco.db';
+      path = '${directory.path}/WTBanco.db';
     } else if (Platform.isWindows) {
       final directory =
           Directory('${Platform.environment['USERPROFILE']}\\Documents');
-      path = '${directory.path}\\banco.db';
+      path = '${directory.path}\\WTBanco.db';
     } else if (Platform.isMacOS) {
       final directory = Directory('${Platform.environment['HOME']}/Documents');
-      path = '${directory.path}/banco.db';
+      path = '${directory.path}/WTBanco.db';
     } else {
       throw UnsupportedError("Plataforma não suportada");
     }
@@ -29,7 +29,7 @@ class GerenciarBanco {
   }
 
     Future<Database> _abrirBanco() async {
-    final path = await _obterCaminhoBanco();
+    final path = await obterCaminhoBanco();
     return sqlite3.open(path);
   }
 

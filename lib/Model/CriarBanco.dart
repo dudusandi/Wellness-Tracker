@@ -1,26 +1,13 @@
-import 'dart:io';
-
-import 'package:path_provider/path_provider.dart';
+import 'package:WelnessTracker/Model/GerenciarBanco.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 class CriarBanco {
+
+   GerenciarBanco gerenciarBanco = GerenciarBanco();
   
   Future<void> criarBancoDeDados() async {
-    late String path;
-
-    if (Platform.isIOS || Platform.isAndroid) {
-      final directory = await getApplicationDocumentsDirectory();
-      path = '${directory.path}/banco.db';
-    } else if (Platform.isWindows) {
-      final directory =
-          Directory('${Platform.environment['USERPROFILE']}\\Documents');
-      path = '${directory.path}\\banco.db';
-    } else if (Platform.isMacOS) {
-      final directory = Directory('${Platform.environment['HOME']}/Documents');
-      path = '${directory.path}/banco.db';
-    } else {
-      throw UnsupportedError("Plataforma não suportada");
-    }
+    
+    final path = await gerenciarBanco.obterCaminhoBanco();
 
     final db = sqlite3.open(path);
 
