@@ -1,4 +1,4 @@
-import 'package:welness_tracker/Model/GerenciarBanco.dart';
+import 'package:wellness_tracker/Model/GerenciarBanco.dart';
 import 'package:sqlite3/sqlite3.dart';
 
 class CriarBanco {

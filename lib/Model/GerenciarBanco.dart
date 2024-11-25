@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:welness_tracker/Model/Exame.dart';
-import 'package:welness_tracker/Model/Usuario.dart';
+import 'package:wellness_tracker/Model/Exame.dart';
+import 'package:wellness_tracker/Model/Usuario.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'dart:async';
