@@ -1,5 +1,6 @@
 import 'package:WelnessTracker/Model/Exame.dart';
 import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sqlite3/sqlite3.dart';
 import 'dart:async';
 
@@ -7,8 +8,12 @@ class GerenciarBanco {
 
 
 Future<void> criarUsuario(Usuario usuario) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
+
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
 
     db.execute(
       'INSERT INTO usuarios (nome, data_nascimento, email, senha) VALUES (?, ?, ?, ?)',
@@ -18,9 +23,12 @@ Future<void> criarUsuario(Usuario usuario) async {
 }
 
 Future<void> salvarFichaMedica(int id, double frequenciaExercicio, String comorbidades, String medicacoes, int isSwitched) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
 
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
   db.execute(
     'UPDATE usuarios SET frequencia_exercicio = ?, comorbidades = ?, medicacoes = ?,  is_medicacao_continua= ? WHERE id = ?',
     [
@@ -38,8 +46,12 @@ Future<void> salvarFichaMedica(int id, double frequenciaExercicio, String comorb
 
 
 Future<void> criarExame(Exame exame,int usuarioID) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
+
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
 
     db.execute(
       'INSERT INTO exames (nome, data_exame, valor, usuario_id) VALUES (?, ?, ?, ?)',
@@ -50,8 +62,12 @@ Future<void> criarExame(Exame exame,int usuarioID) async {
 
 
 Future<bool> logar(String email, String senha) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
+
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
 
   final ResultSet result = db.select(
     'SELECT * FROM usuarios WHERE email = ? AND senha = ?',
@@ -65,9 +81,12 @@ Future<bool> logar(String email, String senha) async {
 }
 
 Future<Usuario?> obterUsuarioPorEmail(String email) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
 
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
   final result = db.select('''
     SELECT * FROM usuarios 
     WHERE email = ?
@@ -94,9 +113,12 @@ Future<Usuario?> obterUsuarioPorEmail(String email) async {
 }
 
 Future<List<Exame>> obterExamesPorUsuarioId(int usuarioId) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
 
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
   final result = db.select(
     'SELECT * FROM exames WHERE usuario_id = ?',
     [usuarioId],
@@ -114,8 +136,12 @@ Future<List<Exame>> obterExamesPorUsuarioId(int usuarioId) async {
 }
 
 Future<double?> obterValorExame(int usuarioId, String nomeExame) async {
-  final banco = 'banco.db';
-  final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
+
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
 
   final result = db.select(
     'SELECT valor FROM exames WHERE usuario_id = ? AND nome = ? ORDER BY data_exame DESC LIMIT 1',
@@ -132,8 +158,12 @@ Future<double?> obterValorExame(int usuarioId, String nomeExame) async {
 
 
   Future<void> removerExamePorId(int exameId) async {
-    final banco = 'banco.db';
-    final db = sqlite3.open(banco);
+  final directory = await getApplicationDocumentsDirectory();
+  final path = '${directory.path}/banco.db';
+
+
+//final banco = 'banco.db';
+final db = sqlite3.open(path);
 
     db.execute(
       'DELETE FROM exames WHERE id = ?',

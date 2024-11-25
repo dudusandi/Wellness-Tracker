@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:WelnessTracker/Interface/Menu.dart';
 import 'package:WelnessTracker/Interface/CriarConta.dart';
 import 'package:WelnessTracker/Model/CriarBanco.dart';
@@ -13,6 +15,8 @@ GerenciarBanco _gerenciarBanco = GerenciarBanco();
 void main() async{
   
     WidgetsFlutterBinding.ensureInitialized();
+
+    if(Platform.isWindows || Platform.isMacOS){
      await windowManager.ensureInitialized();
 
     WindowOptions windowOptions = WindowOptions(
@@ -30,6 +34,7 @@ void main() async{
     await windowManager.show();
     await windowManager.focus();
     });
+    }
 
   runApp(MyApp());
   _criarBanco.criarBancoDeDados();
