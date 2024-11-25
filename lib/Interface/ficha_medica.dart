@@ -20,7 +20,7 @@ class _FichaMedicaState extends State<FichaMedica> {
   late TextEditingController idadeController;
   TextEditingController comorbidades = TextEditingController();
   TextEditingController medicacoes = TextEditingController();
-  bool isSwitched = true;
+ bool isSwitched = true;
   double FrequenciaExercicio = 0;
 
   int calcularIdade(String dataNascimento) {

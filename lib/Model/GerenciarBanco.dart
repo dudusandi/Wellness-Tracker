@@ -86,7 +86,7 @@ Future<Usuario?> obterUsuarioPorEmail(String email) async {
       frequenciaExercicio: double.tryParse(usuarioData['frequencia_exercicio'].toString()) ?? 0,
       comorbidades: usuarioData['comorbidades'],
       medicacoes: usuarioData['medicacoes'],
-      isSwitched: usuarioData['isMedicacaoContinua']
+      isSwitched: usuarioData['is_medicacao_continua'] == 'true' || usuarioData['is_medicacao_continua'] == '1',
     );
   }
 

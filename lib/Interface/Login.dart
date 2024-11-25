@@ -74,7 +74,7 @@ class _LoginState extends State<Login> {
         frequenciaExercicio: usuarioDados.frequenciaExercicio,
         comorbidades: usuarioDados.comorbidades,
         medicacoes: usuarioDados.medicacoes,
-        isSwitched: usuarioDados.isSwitched
+        isSwitched:  usuarioDados.isSwitched
 
       );
       UsuarioLogado.setUsuario(usuario); 
