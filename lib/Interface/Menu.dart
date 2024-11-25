@@ -1,7 +1,7 @@
-import 'package:WelnessTracker/Interface/Ajuda.dart';
-import 'package:WelnessTracker/Interface/Login.dart';
-import 'package:WelnessTracker/Interface/PaginaInicial.dart';
-import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:welness_tracker/Interface/Ajuda.dart';
+import 'package:welness_tracker/Interface/Login.dart';
+import 'package:welness_tracker/Interface/PaginaInicial.dart';
+import 'package:welness_tracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import '../Interface/exames.dart';
 import 'ficha_medica.dart';

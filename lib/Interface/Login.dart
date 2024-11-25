@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:WelnessTracker/Interface/Menu.dart';
-import 'package:WelnessTracker/Interface/CriarConta.dart';
-import 'package:WelnessTracker/Model/CriarBanco.dart';
-import 'package:WelnessTracker/Model/GerenciarBanco.dart';
-import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:welness_tracker/Interface/Menu.dart';
+import 'package:welness_tracker/Interface/CriarConta.dart';
+import 'package:welness_tracker/Model/CriarBanco.dart';
+import 'package:welness_tracker/Model/GerenciarBanco.dart';
+import 'package:welness_tracker/Model/Usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
@@ -25,7 +25,7 @@ void main() async{
     maximumSize: Size(1280, 800),
     fullScreen: false,
     center: true,
-    title: "WelnessTracker",
+    title: "welness_tracker",
     windowButtonVisibility: true,
     titleBarStyle: TitleBarStyle.normal,
     );

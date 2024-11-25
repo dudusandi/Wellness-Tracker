@@ -1,6 +1,6 @@
-import 'package:WelnessTracker/Controlador/Controller.dart';
-import 'package:WelnessTracker/Interface/Login.dart';
-import 'package:WelnessTracker/Model/GerenciarBanco.dart';
+import 'package:welness_tracker/Controlador/Controller.dart';
+import 'package:welness_tracker/Interface/Login.dart';
+import 'package:welness_tracker/Model/GerenciarBanco.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 

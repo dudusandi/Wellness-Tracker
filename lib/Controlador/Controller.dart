@@ -1,6 +1,6 @@
-import 'package:WelnessTracker/Model/Exame.dart';
-import 'package:WelnessTracker/Model/GerenciarBanco.dart';
-import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:welness_tracker/Model/Exame.dart';
+import 'package:welness_tracker/Model/GerenciarBanco.dart';
+import 'package:welness_tracker/Model/Usuario.dart';
 
 class Controller {
   final GerenciarBanco _gerenciarBanco;

@@ -1,7 +1,7 @@
-import 'package:WelnessTracker/Controlador/Controller.dart';
-import 'package:WelnessTracker/Model/GerenciarBanco.dart';
-import 'package:WelnessTracker/Model/Usuario.dart';
-import 'package:WelnessTracker/Model/UsuarioLogado.dart';
+import 'package:welness_tracker/Controlador/Controller.dart';
+import 'package:welness_tracker/Model/GerenciarBanco.dart';
+import 'package:welness_tracker/Model/Usuario.dart';
+import 'package:welness_tracker/Model/UsuarioLogado.dart';
 import 'package:flutter/material.dart';
 
 class FichaMedica extends StatefulWidget {

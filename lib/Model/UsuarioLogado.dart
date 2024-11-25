@@ -1,4 +1,4 @@
-import 'package:WelnessTracker/Model/Usuario.dart';
+import 'package:welness_tracker/Model/Usuario.dart';
 
 class UsuarioLogado {
   static Usuario? usuario; 
