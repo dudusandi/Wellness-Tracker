@@ -19,7 +19,7 @@ void main() async{
     if(Platform.isWindows || Platform.isMacOS){
      await windowManager.ensureInitialized();
 
-    WindowOptions windowOptions = WindowOptions(
+    WindowOptions windowOptions = const WindowOptions(
     size: Size(1280, 800),
     minimumSize: Size(1280, 800),
     maximumSize: Size(1280, 800),
@@ -90,7 +90,7 @@ class _LoginState extends State<Login> {
     }
   } else {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Email ou senha incorretos")),
+      const SnackBar(content: Text("Email ou senha incorretos")),
     );
   }
 }
@@ -98,12 +98,12 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF472B2B),
+      backgroundColor: const Color(0xFF472B2B),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'WELLNESS TRACKER',
               style: TextStyle(
                 color: Colors.white,
@@ -111,32 +111,32 @@ class _LoginState extends State<Login> {
                 fontFamily: 'JuliusSansOne',
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 80,
             ),
             Container(
               width: 300,
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.white),
               child: TextField(
                 onSubmitted: (value) {
                   _realizarLogin();
                 },
-                style: TextStyle(),
+                style: const TextStyle(),
                 controller: _loginEmailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Email", border: InputBorder.none),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
               width: 300,
-              padding: EdgeInsets.all(5),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(5),
+              decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.white),
               child: TextField(
@@ -144,22 +144,22 @@ class _LoginState extends State<Login> {
                 onSubmitted: (value) {
                   _realizarLogin();
                 },
-                style: TextStyle(),
+                style: const TextStyle(),
                 controller: _loginSenhaController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     labelText: "Senha", border: InputBorder.none),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             ElevatedButton(
-              style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+              style:ElevatedButton.styleFrom(backgroundColor: const Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                 onPressed: () {
                   _realizarLogin();
                 },
-                child: Text("Entrar", style: TextStyle(color: Colors.white),), ),
-            SizedBox(
+                child: const Text("Entrar", style: TextStyle(color: Colors.white),), ),
+            const SizedBox(
               height: 40,
             ),
             GestureDetector(
@@ -169,7 +169,7 @@ class _LoginState extends State<Login> {
                   MaterialPageRoute(builder: (context) => LoginCadastro()),
                 );
               },
-              child: Text(
+              child: const Text(
                 "Não tem conta? Cadastre-se!",
                 style: TextStyle(color: Colors.white),
               ),

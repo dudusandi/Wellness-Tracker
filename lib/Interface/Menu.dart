@@ -52,13 +52,13 @@ class _InicioState extends State<Inicio> {
         children: [
           Container(
             width: 280,
-            color: Color(0xFFBE6161),
+            color: const Color(0xFFBE6161),
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  SizedBox(height: 40),
-                  Text(
+                  const SizedBox(height: 40),
+                  const Text(
                     'WELLNESS TRACKER',
                     style: TextStyle(
                       color: Colors.white,
@@ -66,15 +66,15 @@ class _InicioState extends State<Inicio> {
                       fontFamily: 'JuliusSansOne',
                     ),
                   ),
-                  SizedBox(height: 60),
+                  const SizedBox(height: 60),
                   _buildMenuItem(Icons.home, 'Principal', 0),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   _buildMenuItem(Icons.add, 'Novo Exame', 3),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   _buildMenuItem(Icons.assignment, 'Ver Exames', 1),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   _buildMenuItem(Icons.favorite, 'Ficha Médica', 2),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   _buildMenuItem(Icons.help, 'Ajuda', 4),
                 ],
               ),
@@ -92,10 +92,10 @@ class _InicioState extends State<Inicio> {
     final bool isSelected = _selectedIndex == index;
 
     return ListTile(
-      leading: Icon(icon, color: isSelected ? Color.fromARGB(255, 39, 32, 32) : Colors.white,),
+      leading: Icon(icon, color: isSelected ? const Color.fromARGB(255, 39, 32, 32) : Colors.white,),
       title: Text(title,
           style: TextStyle(
-              color: isSelected ? Color.fromARGB(255, 39, 32, 32) : Colors.white, fontFamily: 'JuliusSansOne', fontSize: 20)),
+              color: isSelected ? const Color.fromARGB(255, 39, 32, 32) : Colors.white, fontFamily: 'JuliusSansOne', fontSize: 20)),
       onTap: () {
         setState(() {
           _selectedIndex = index;

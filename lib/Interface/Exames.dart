@@ -35,32 +35,32 @@ class _ExamesState extends State<Exames> {
     await _controller.removerExame(exameId);
     _carregarExames();
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Exame removido com sucesso")),
+      const SnackBar(content: Text("Exame removido com sucesso")),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF472B2B),
-      padding: EdgeInsets.all(60),
+      color: const Color(0xFF472B2B),
+      padding: const EdgeInsets.all(60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Ver Exames',
             style: TextStyle(
                 color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
           ),
-          SizedBox(height: 60),
+          const SizedBox(height: 60),
           Expanded(
             child: Container(
-              padding: EdgeInsets.all(40),
+              padding: const EdgeInsets.all(40),
               decoration: BoxDecoration(
-                  color: Color(0xFF351A1A),
+                  color: const Color(0xFF351A1A),
                   borderRadius: BorderRadius.circular(20)),
               child: _exames.isEmpty
-                  ? Center(
+                  ? const Center(
                       child: Text(
                         'Nenhum exame encontrado.',
                         style: TextStyle(color: Colors.white, fontSize: 20),
@@ -74,14 +74,14 @@ class _ExamesState extends State<Exames> {
                         return ListTile(
                           title: Text(
                             exame.nome,
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           subtitle: Text(
                             'Data: ${exame.dataExame} - Valor: ${exame.valor}',
-                            style: TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.grey),
                           ),
                           trailing: IconButton(
-                            icon: Icon(Icons.delete, color: Colors.red),
+                            icon: const Icon(Icons.delete, color: Colors.red),
                             onPressed: () async =>
                                 await _removerExame(exame.id!),
                           ),

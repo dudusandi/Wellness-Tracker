@@ -9,9 +9,9 @@ class _AjudaState extends State<Ajuda> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Color(0xFF472B2B),
-        padding: EdgeInsets.all(60),
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        color: const Color(0xFF472B2B),
+        padding: const EdgeInsets.all(60),
+        child: const Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text(
             'Ajuda',
             style: TextStyle(

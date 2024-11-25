@@ -70,27 +70,27 @@ class _NovoExameState extends State<NovoExame> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color(0xFF472B2B),
-        padding: EdgeInsets.all(60),
+        color: const Color(0xFF472B2B),
+        padding: const EdgeInsets.all(60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Novo Exame',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 32,
                   fontFamily: 'JuliusSansOne'),
             ),
-            SizedBox(height: 80),
-            Text(
+            const SizedBox(height: 80),
+            const Text(
               'Selecione o tipo de exame, em seguida insira o valor na unidade de medida correta:',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
                   fontFamily: 'JuliusSansOne'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 40,
             ),
             Row(
@@ -101,10 +101,10 @@ class _NovoExameState extends State<NovoExame> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.white),
                     child: DropdownButton<ExameSangue>(
-                      hint: Text('Selecione o Exame'),
+                      hint: const Text('Selecione o Exame'),
                       value: _exameSelecionado,
-                      padding: EdgeInsets.only(left: 10, right: 10),
-                      underline: SizedBox(),
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      underline: const SizedBox(),
                       isExpanded: true,
                       items: ExameSangue.examesPredefinidos
                           .map((ExameSangue exame) {
@@ -121,12 +121,12 @@ class _NovoExameState extends State<NovoExame> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.only(left: 10, right: 10),
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.white,
@@ -144,10 +144,10 @@ class _NovoExameState extends State<NovoExame> {
                 )
               ],
             ),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             Container(
                 width: 300,
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: const EdgeInsets.only(left: 10, right: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.white,
@@ -155,11 +155,11 @@ class _NovoExameState extends State<NovoExame> {
                 child: TextField(
                   controller: _dataController,
                   inputFormatters: [maskFormatter],
-                  decoration: InputDecoration(labelText: "Data do Exame"),
+                  decoration: const InputDecoration(labelText: "Data do Exame"),
                 )),
-            SizedBox(height: 40),
+            const SizedBox(height: 40),
             ElevatedButton(
-              style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),fixedSize: Size(200, 50),),
+              style:ElevatedButton.styleFrom(backgroundColor: const Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),fixedSize: const Size(200, 50),),
               onPressed: () => {
                 if (_exameSelecionado != null && usuarioId != null)
                   {
@@ -176,10 +176,10 @@ class _NovoExameState extends State<NovoExame> {
                 _dataController.clear(),
                 _valorController.clear(),
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Exame Cadastrado com Sucesso")),
+                  const SnackBar(content: Text("Exame Cadastrado com Sucesso")),
                 )
               },
-              child: Text('Adicionar Exame', style: TextStyle(color: Colors.white),),
+              child: const Text('Adicionar Exame', style: TextStyle(color: Colors.white),),
             ),
           ],
         ),

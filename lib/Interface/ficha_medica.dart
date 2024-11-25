@@ -27,7 +27,7 @@ class _FichaMedicaState extends State<FichaMedica> {
     try {
       List<String> partes = dataNascimento.split('/');
       if (partes.length != 3) {
-        throw FormatException('Formato de data inválido');
+        throw const FormatException('Formato de data inválido');
       }
       String dataFormatada = "${partes[2]}-${partes[1]}-${partes[0]}";
       DateTime nascimento = DateTime.parse(dataFormatada);
@@ -59,52 +59,52 @@ class _FichaMedicaState extends State<FichaMedica> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF472B2B),
-      padding: EdgeInsets.all(60),
+      color: const Color(0xFF472B2B),
+      padding: const EdgeInsets.all(60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Ficha Médica',
             style: TextStyle(
                 color: Colors.white, fontSize: 32, fontFamily: 'JuliusSansOne'),
           ),
-          SizedBox(height: 80),
+          const SizedBox(height: 80),
           Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Colors.white),
             child: TextField(
               controller: nomeController,
-              style: TextStyle(),
+              style: const TextStyle(),
               decoration:
-                  InputDecoration(labelText: "Nome", border: InputBorder.none),
+                  const InputDecoration(labelText: "Nome", border: InputBorder.none),
             ),
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Row(
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(5),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       color: Colors.white),
                   child: TextField(
                     controller: idadeController,
-                    style: TextStyle(),
-                    decoration: InputDecoration(
+                    style: const TextStyle(),
+                    decoration: const InputDecoration(
                         labelText: "Idade", border: InputBorder.none),
                   ),
                 ),
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Atividade Física',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
@@ -122,7 +122,7 @@ class _FichaMedicaState extends State<FichaMedica> {
                     activeColor: Colors.blue,
                     inactiveColor: Colors.grey,
                   ),
-                  Text(
+                  const Text(
                     'Indique a quantidade de vezes por semana que se exercita',
                     style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
@@ -130,24 +130,24 @@ class _FichaMedicaState extends State<FichaMedica> {
               ))
             ],
           ),
-          SizedBox(height: 40),
+          const SizedBox(height: 40),
           Container(
-            padding: EdgeInsets.all(5),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(5),
+            decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: Colors.white),
             child: TextField(
               controller: comorbidades,
-              style: TextStyle(),
-              decoration: InputDecoration(
+              style: const TextStyle(),
+              decoration: const InputDecoration(
                   labelText: "Comorbidades", border: InputBorder.none),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(right: 20),
+              const Padding(
+                padding: EdgeInsets.only(right: 20),
                 child: Text(
                   "Medicação Continua",
                   style: TextStyle(color: Colors.white),
@@ -167,19 +167,19 @@ class _FichaMedicaState extends State<FichaMedica> {
               ),
             ],
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             children: [
               Expanded(
                 child: Container(
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.white,
                   ),
                   child: TextField(
                     controller: medicacoes,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Nome das Medicações",
                       border: InputBorder.none,
                     ),
@@ -188,16 +188,16 @@ class _FichaMedicaState extends State<FichaMedica> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           ElevatedButton(
-            style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),fixedSize: Size(150, 40)),
+            style:ElevatedButton.styleFrom(backgroundColor: const Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),fixedSize: const Size(150, 40)),
             onPressed: () {
               int isMedicacaoContinua = isSwitched ? 1 : 0;
               setState(() {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Ficha Médica Atualizada!")),
+                  const SnackBar(content: Text("Ficha Médica Atualizada!")),
                 );
                 widget.usuario.medicacoes = medicacoes.text;
                 widget.usuario.comorbidades = comorbidades.text;
@@ -207,7 +207,7 @@ class _FichaMedicaState extends State<FichaMedica> {
               funcoes.salvarFichaMedica(usuarioId!, frequenciaExercicio,
                   comorbidades.text, medicacoes.text, isMedicacaoContinua);
             },
-            child: Text("Salvar", style: TextStyle(color: Colors.white),),
+            child: const Text("Salvar", style: TextStyle(color: Colors.white),),
           )
         ],
       ),

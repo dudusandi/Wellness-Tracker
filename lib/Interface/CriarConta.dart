@@ -33,7 +33,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF472B2B),
+      backgroundColor: const Color(0xFF472B2B),
       body: Center(
         child: SizedBox(
           width: 400,
@@ -41,7 +41,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'CRIAR NOVA CONTA',
                 style: TextStyle(
                   color: Colors.white,
@@ -49,76 +49,76 @@ class _LoginCadastroState extends State<LoginCadastro> {
                   fontFamily: 'JuliusSansOne',
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
                   controller: _nomeController,
-                  style: TextStyle(),
-                  decoration: InputDecoration(
+                  style: const TextStyle(),
+                  decoration: const InputDecoration(
                       labelText: "Nome", border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
                   controller: _dataNascimentoController,
                   inputFormatters: [maskFormatter],
-                  style: TextStyle(),
-                  decoration: InputDecoration(
+                  style: const TextStyle(),
+                  decoration: const InputDecoration(
                       labelText: "Data de Nascimento",
                       border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
                   controller: _emailController,
-                  style: TextStyle(),
-                  decoration: InputDecoration(
+                  style: const TextStyle(),
+                  decoration: const InputDecoration(
                       labelText: "Email", border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.white),
                 child: TextField(
                   controller: _senhaController,
-                  style: TextStyle(),
-                  decoration: InputDecoration(
+                  style: const TextStyle(),
+                  decoration: const InputDecoration(
                       labelText: "Senha", border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      style:ElevatedButton.styleFrom(backgroundColor: const Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                         onPressed: () async {
                           try {
                             await funcoes.adicionarUsuario(
@@ -132,7 +132,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
                             _emailController.clear();
                             _senhaController.clear();
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                   content: Text("Conta criada com Sucesso!")),
                             );
                             Navigator.push(
@@ -141,26 +141,26 @@ class _LoginCadastroState extends State<LoginCadastro> {
                             );
                           } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                   content: Text("Erro ao criar conta:  Usuário já está cadastrado no Sistema!")),
                             );
                           }
                         },
-                        child: Text("Criar Conta", style: TextStyle(color: Colors.white),)),
+                        child: const Text("Criar Conta", style: TextStyle(color: Colors.white),)),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Expanded(
                     child: ElevatedButton(
-                      style:ElevatedButton.styleFrom(backgroundColor: Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                      style:ElevatedButton.styleFrom(backgroundColor: const Color(0xFFBE6161,),shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Login()),
                           );
                         },
-                        child: Text("Voltar ao Inicio",style: TextStyle(color: Colors.white),)),
+                        child: const Text("Voltar ao Inicio",style: TextStyle(color: Colors.white),)),
                   ),
                 ],
               ),

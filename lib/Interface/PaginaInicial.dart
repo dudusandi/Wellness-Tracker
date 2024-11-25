@@ -56,8 +56,8 @@ Future<void> _carregar() async {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xFF472B2B),
-      padding: EdgeInsets.only(top: 50, bottom: 20, left: 50, right: 50),
+      color: const Color(0xFF472B2B),
+      padding: const EdgeInsets.only(top: 50, bottom: 20, left: 50, right: 50),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -67,7 +67,7 @@ Future<void> _carregar() async {
                 flex: 4,
                 child: Text(
                   'Bem Vindo, ${widget.usuario.nome}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 32,
                       fontFamily: 'JuliusSansOne'),
@@ -82,10 +82,10 @@ Future<void> _carregar() async {
                       MaterialPageRoute(builder: (context) => Login()),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     "Sair da Conta",
                     style: TextStyle(
-                        color: const Color.fromARGB(255, 156, 96, 91),
+                        color: Color.fromARGB(255, 156, 96, 91),
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
@@ -93,20 +93,20 @@ Future<void> _carregar() async {
               ),
             ],
           ),
-          SizedBox(height: 80),
-          Text('Dados Recentes',
+          const SizedBox(height: 80),
+          const Text('Dados Recentes',
               style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'JuliusSansOne',
                   fontSize: 16)),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                 child: Card(
-                  color: Color(0xFF351A1A),
+                  color: const Color(0xFF351A1A),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -116,14 +116,14 @@ Future<void> _carregar() async {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.favorite, color: Colors.red, size: 80),
+                            const Icon(Icons.favorite, color: Colors.red, size: 80),
                             Expanded(
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 60),
                                 child: Center(
                                   child: Text(
                                     _resumoCompleto,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontFamily: 'JuliusSansOne',
@@ -134,8 +134,8 @@ Future<void> _carregar() async {
                             )
                           ],
                         ),
-                        SizedBox(height: 20),
-                        Center(
+                        const SizedBox(height: 20),
+                        const Center(
                           child: Text(
                             'Resumo sobre sua Saúde',
                             style: TextStyle(
@@ -145,16 +145,16 @@ Future<void> _carregar() async {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10)
+                        const SizedBox(height: 10)
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(width: 20),
+              const SizedBox(width: 20),
               Expanded(
                 child: Card(
-                  color: Color(0xFF351A1A),
+                  color: const Color(0xFF351A1A),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -164,7 +164,7 @@ Future<void> _carregar() async {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.calendar_month,
+                            const Icon(Icons.calendar_month,
                                 color: Colors.lightBlueAccent, size: 80),
                             Expanded(
                               child: Padding(
@@ -172,7 +172,7 @@ Future<void> _carregar() async {
                                 child: Center(
                                   child: Text(
                                      _exames.isNotEmpty? _exames.first.dataExame: 'Não Disponivel',
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontFamily: 'JuliusSansOne',
@@ -183,8 +183,8 @@ Future<void> _carregar() async {
                             )
                           ],
                         ),
-                        SizedBox(height: 20),
-                        Center(
+                        const SizedBox(height: 20),
+                        const Center(
                           child: Text(
                             'Data do Último Exame',
                             style: TextStyle(
@@ -194,7 +194,7 @@ Future<void> _carregar() async {
                             ),
                           ),
                         ),
-                        SizedBox(height: 10)
+                        const SizedBox(height: 10)
                       ],
                     ),
                   ),
@@ -202,47 +202,47 @@ Future<void> _carregar() async {
               ),
             ],
           ),
-          SizedBox(height: 20),
-          Text('Resumo Médico',
+          const SizedBox(height: 20),
+          const Text('Resumo Médico',
               style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'JuliusSansOne',
                   fontSize: 16)),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: Container(
               width: 3000,
               height: 3000,
-              padding: EdgeInsets.only(top: 10, right: 30, left: 30, bottom: 10),
+              padding: const EdgeInsets.only(top: 10, right: 30, left: 30, bottom: 10),
               decoration: BoxDecoration(
 
                   borderRadius: BorderRadius.circular(20),
-                  color: Color(0xFF351A1A)),
+                  color: const Color(0xFF351A1A)),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     _resumoHemograma,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
                     _resumoPerfilLipidico,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
                     _resumoTireoide,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
                   ),
                   Text(
                     _resumoGlicemia,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xffF6F6F6),
                     ),
                   ),
