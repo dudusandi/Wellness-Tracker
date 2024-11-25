@@ -162,8 +162,6 @@ class GerenciarBanco {
       'DELETE FROM exames WHERE id = ?',
       [exameId],
     );
-
-    print('Exame com ID $exameId removido com sucesso!');
     db.dispose();
   }
 }

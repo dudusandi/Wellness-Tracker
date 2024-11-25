@@ -10,8 +10,8 @@ class Controller {
   
 
   Future<void> criarExame(String nome,String dataExame,String valor, int usuarioID) async {
-            Exame NovoExame = Exame(nome:nome,dataExame: dataExame, valor: valor, usuarioId: usuarioID);
-            await _gerenciarBanco.criarExame(NovoExame, usuarioID);
+            Exame novoExame = Exame(nome:nome,dataExame: dataExame, valor: valor, usuarioId: usuarioID);
+            await _gerenciarBanco.criarExame(novoExame, usuarioID);
   }
 
 

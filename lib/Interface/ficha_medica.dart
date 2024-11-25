@@ -21,7 +21,7 @@ class _FichaMedicaState extends State<FichaMedica> {
   TextEditingController comorbidades = TextEditingController();
   TextEditingController medicacoes = TextEditingController();
  bool isSwitched = true;
-  double FrequenciaExercicio = 0;
+  double frequenciaExercicio = 0;
 
   int calcularIdade(String dataNascimento) {
     try {
@@ -39,7 +39,6 @@ class _FichaMedicaState extends State<FichaMedica> {
       }
       return idade;
     } catch (e) {
-      print("Erro ao calcular idade: $e");
       return 0;
     }
   }
@@ -51,7 +50,7 @@ class _FichaMedicaState extends State<FichaMedica> {
     nomeController = TextEditingController(text: widget.usuario.nome);
     int idade = calcularIdade(widget.usuario.dataNascimento);
     idadeController = TextEditingController(text: idade.toString());
-    FrequenciaExercicio = widget.usuario.frequenciaExercicio!;
+    frequenciaExercicio = widget.usuario.frequenciaExercicio!;
     comorbidades = TextEditingController(text: widget.usuario.comorbidades);
     medicacoes = TextEditingController(text: widget.usuario.medicacoes);
     isSwitched = widget.usuario.isSwitched ?? false;
@@ -110,14 +109,14 @@ class _FichaMedicaState extends State<FichaMedica> {
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
                   Slider(
-                    value: FrequenciaExercicio,
+                    value: frequenciaExercicio,
                     min: 0,
                     max: 7,
                     divisions: 7,
-                    label: FrequenciaExercicio.round().toString(),
+                    label: frequenciaExercicio.round().toString(),
                     onChanged: (double value) {
                       setState(() {
-                        FrequenciaExercicio = value;
+                        frequenciaExercicio = value;
                       });
                     },
                     activeColor: Colors.blue,
@@ -202,10 +201,10 @@ class _FichaMedicaState extends State<FichaMedica> {
                 );
                 widget.usuario.medicacoes = medicacoes.text;
                 widget.usuario.comorbidades = comorbidades.text;
-                widget.usuario.frequenciaExercicio = FrequenciaExercicio;
+                widget.usuario.frequenciaExercicio = frequenciaExercicio;
                 widget.usuario.isSwitched = isSwitched;
               });
-              funcoes.salvarFichaMedica(usuarioId!, FrequenciaExercicio,
+              funcoes.salvarFichaMedica(usuarioId!, frequenciaExercicio,
                   comorbidades.text, medicacoes.text, isMedicacaoContinua);
             },
             child: Text("Salvar", style: TextStyle(color: Colors.white),),

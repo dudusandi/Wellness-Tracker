@@ -35,7 +35,7 @@ class _LoginCadastroState extends State<LoginCadastro> {
     return Scaffold(
       backgroundColor: Color(0xFF472B2B),
       body: Center(
-        child: Container(
+        child: SizedBox(
           width: 400,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
